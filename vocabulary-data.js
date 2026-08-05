@@ -169,13 +169,6 @@ const LONDON_VOCAB_DATA = {
           explanation: "Notting Hill is in West London, so follow signs for the Westbound platform! (Direção Oeste)."
         },
         {
-          id: "tube_q2",
-          type: "fill_blank",
-          sentence: "To travel towards King's Cross station in North London, follow signs for the _____ platform.",
-          correctAnswer: "Northbound",
-          hint: "Direction going North (Norte)."
-        },
-        {
           id: "tube_q4",
           type: "mcq",
           question: "Which Tube station stop should Gabriela use to visit the Natural History Museum?",
@@ -190,6 +183,7 @@ const LONDON_VOCAB_DATA = {
         }
       ]
     },
+
 
     {
       id: "cafe",
