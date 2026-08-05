@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div>
               <div class="card-word">${w.word}</div>
               <div class="card-phonetic">${w.phonetic}</div>
+              ${w.ptTranslation ? `<div class="card-pt-translation">🇵🇹 ${w.ptTranslation}</div>` : ''}
             </div>
             <div class="card-hint-text">
               <span>💡 Tap card to view definition</span>
@@ -171,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <p class="card-example">"${w.example}"</p>
             </div>
             <div class="card-tip">
+              🇵🇹 <strong>Tradutção:</strong> ${w.ptTranslation}<br>
               💡 <strong>Tip:</strong> ${w.tip}
             </div>
           </div>
@@ -178,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `).join('');
   }
+
 
   window.playAudio = (text) => {
     speakWord(text);
@@ -444,10 +447,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="tip-card">
         <div class="tip-icon">${tip.icon}</div>
         <h3 class="tip-title serif-font">${tip.title}</h3>
+        ${tip.ptSubtitle ? `<div style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 6px;">🇵🇹 ${tip.ptSubtitle}</div>` : ''}
         <p class="tip-text">${tip.text}</p>
       </div>
     `).join('');
   }
+
 
   /* --------------------------------------------------------------------------
      7. Progress UI & Teacher Report Exporter

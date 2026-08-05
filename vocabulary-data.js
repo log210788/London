@@ -2,6 +2,7 @@ const LONDON_VOCAB_DATA = {
   studentName: "Gabriela",
   destination: "London, UK 🇬🇧",
   tripTime: "January / February",
+  nativeLanguage: "Portuguese 🇵🇹",
   
   categories: [
     {
@@ -12,6 +13,7 @@ const LONDON_VOCAB_DATA = {
       words: [
         {
           word: "Passport Control",
+          ptTranslation: "Controlo de Passaportes 🇵🇹",
           phonetic: "/ˈpɑːspɔːt kənˈtrəʊl/",
           pos: "noun",
           definition: "The place at an airport where officials check your passport.",
@@ -20,6 +22,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Baggage Reclaim",
+          ptTranslation: "Recolha de Bagagem 🇵🇹",
           phonetic: "/ˈbæɡɪdʒ rɪˈkleɪm/",
           pos: "noun",
           definition: "The area in an airport where arriving passengers collect luggage.",
@@ -28,6 +31,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Customs",
+          ptTranslation: "Alfândega 🇵🇹",
           phonetic: "/ˈkʌstəmz/",
           pos: "noun",
           definition: "The officer or place where goods brought into a country are checked.",
@@ -36,6 +40,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Purpose of visit",
+          ptTranslation: "Motivo da viagem / visita 🇵🇹",
           phonetic: "/ˈpɜːpəs əv ˈvɪzɪt/",
           pos: "phrase",
           definition: "The main reason why you are traveling to a country.",
@@ -44,6 +49,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Accommodation",
+          ptTranslation: "Alojamento / Hotel 🇵🇹",
           phonetic: "/əˌkɒməˈdeɪʃn/",
           pos: "noun",
           definition: "A place to live or stay, such as a hotel or apartment.",
@@ -63,14 +69,14 @@ const LONDON_VOCAB_DATA = {
             "Where is the Tube station?"
           ],
           correct: 0,
-          explanation: "State clearly that you are traveling for tourism/vacation."
+          explanation: "State clearly that you are traveling for tourism/vacation. (Resposta: Estou aqui de férias/turismo)."
         },
         {
           id: "air_q2",
           type: "fill_blank",
           sentence: "After landing, walk to _____ Reclaim to pick up your luggage.",
           correctAnswer: "Baggage",
-          hint: "Starts with 'B' (bags and suitcases)."
+          hint: "Starts with 'B' (Recolha de bagagem)."
         },
         {
           id: "air_q3",
@@ -83,7 +89,7 @@ const LONDON_VOCAB_DATA = {
             "Gold Channel"
           ],
           correct: 1,
-          explanation: "The Green Channel is for passengers with 'Nothing to Declare'."
+          explanation: "The Green Channel is for passengers with 'Nothing to Declare' (Nada a declarar)."
         }
       ]
     },
@@ -95,6 +101,7 @@ const LONDON_VOCAB_DATA = {
       words: [
         {
           word: "Mind the gap",
+          ptTranslation: "Atenção ao vão (entre o comboio e a plataforma) 🇵🇹",
           phonetic: "/maɪnd ðə ɡæp/",
           pos: "phrase",
           definition: "A famous warning spoken at Tube stations to watch the space between the train and platform.",
@@ -103,6 +110,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Oyster Card",
+          ptTranslation: "Cartão Oyster (cartão de transportes de Londres) 🇵🇹",
           phonetic: "/ˈɔɪstə kɑːd/",
           pos: "noun",
           definition: "A smart card used to pay for public transport in London.",
@@ -111,6 +119,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Platform",
+          ptTranslation: "Plataforma / Cais de embarque 🇵🇹",
           phonetic: "/ˈplætfɔːm/",
           pos: "noun",
           definition: "The area where passengers wait for a train.",
@@ -119,6 +128,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Double-decker",
+          ptTranslation: "Autocarro vermelho de dois andares 🇵🇹",
           phonetic: "/ˌdʌbl ˈdekə/",
           pos: "noun",
           definition: "The iconic red two-story bus in London.",
@@ -127,6 +137,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Change lines",
+          ptTranslation: "Mudar de linha / Fazer transbordo 🇵🇹",
           phonetic: "/tʃeɪndʒ laɪnz/",
           pos: "verb phrase",
           definition: "To transfer from one underground train line to another at an interchange station.",
@@ -140,7 +151,7 @@ const LONDON_VOCAB_DATA = {
           type: "fill_blank",
           sentence: "At London underground stations, always '_____ the gap' when stepping onto the train.",
           correctAnswer: "Mind",
-          hint: "Means 'be careful of' or 'watch out for'."
+          hint: "Means 'Atenção a' or 'Cuidado com'."
         },
         {
           id: "tube_q2",
@@ -166,7 +177,7 @@ const LONDON_VOCAB_DATA = {
             "Run down as fast as possible"
           ],
           correct: 1,
-          explanation: "In London, stand on the RIGHT side if you want to stand still; keep the left side open for people walking!"
+          explanation: "In London, stand on the RIGHT side if you want to stand still; keep the left side open for people walking! (Fique à direita se estiver parado)."
         }
       ]
     },
@@ -178,6 +189,7 @@ const LONDON_VOCAB_DATA = {
       words: [
         {
           word: "Afternoon Tea",
+          ptTranslation: "Chá da Tarde tradicional inglês 🇵🇹",
           phonetic: "/ˌɑːftəˈnuːn tiː/",
           pos: "noun",
           definition: "A traditional British light meal served with tea, finger sandwiches, scones, and cakes.",
@@ -186,6 +198,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Eat in or take away?",
+          ptTranslation: "Para comer aqui ou para levar? 🇵🇹",
           phonetic: "/iːt ɪn ɔː teɪk əˈweɪ/",
           pos: "phrase",
           definition: "Asked by staff to know if you will eat inside the cafe or carry your food outside.",
@@ -194,6 +207,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "The bill",
+          ptTranslation: "A conta (do restaurante/café) 🇵🇹",
           phonetic: "/ðə bɪl/",
           pos: "noun",
           definition: "The statement showing how much you owe for food/drinks (in US: 'the check').",
@@ -202,6 +216,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Service charge",
+          ptTranslation: "Taxa de serviço (gorjeta incluída na conta) 🇵🇹",
           phonetic: "/ˈsɜːvɪs tʃɑːdʒ/",
           pos: "noun",
           definition: "An extra percentage added to a restaurant bill for staff service (usually 12.5%).",
@@ -210,6 +225,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Sparkling or Still?",
+          ptTranslation: "Água com gás ou sem gás? 🇵🇹",
           phonetic: "/ˈspɑːklɪŋ ɔː stɪl/",
           pos: "phrase",
           definition: "Asked when ordering water: carbonated (bubbly) vs non-carbonated (regular water).",
@@ -223,7 +239,7 @@ const LONDON_VOCAB_DATA = {
           type: "fill_blank",
           sentence: "In London, when asking for the total cost at the end of a restaurant meal, say 'Could we have the _____, please?'",
           correctAnswer: "bill",
-          hint: "In British English, don't say 'check'. Say 'b...'."
+          hint: "Em inglês britânico, a conta diz-se 'b...' (bill)."
         },
         {
           id: "cafe_q2",
@@ -236,7 +252,7 @@ const LONDON_VOCAB_DATA = {
             "Water isn't available."
           ],
           correct: 0,
-          explanation: "Asking politely for 'tap water' is common and standard in UK dining."
+          explanation: "Asking politely for 'tap water' (água da torneira) is standard and free in UK restaurants."
         }
       ]
     },
@@ -248,6 +264,7 @@ const LONDON_VOCAB_DATA = {
       words: [
         {
           word: "Layering up",
+          ptTranslation: "Vestir-se em camadas (roupa quente) 🇵🇹",
           phonetic: "/ˈleɪərɪŋ ʌp/",
           pos: "phrase",
           definition: "Wearing several garments on top of each other to stay warm in winter.",
@@ -256,6 +273,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Drizzle",
+          ptTranslation: "Chuvisco / Chuva miúda 🇵🇹",
           phonetic: "/ˈdrɪzl/",
           pos: "noun/verb",
           definition: "Light, fine rain falling continuously.",
@@ -264,6 +282,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Fitting Room",
+          ptTranslation: "Provador de roupa 🇵🇹",
           phonetic: "/ˈfɪtɪŋ ruːm/",
           pos: "noun",
           definition: "A room in a clothes shop where you can try on clothes before buying.",
@@ -272,6 +291,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Receipt",
+          ptTranslation: "Talão de compra / Recibo 🇵🇹",
           phonetic: "/rɪˈsiːt/",
           pos: "noun",
           definition: "A printed paper showing proof of payment.",
@@ -280,6 +300,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Winter Sale",
+          ptTranslation: "Saldos de Inverno 🇵🇹",
           phonetic: "/ˈwɪntə seɪl/",
           pos: "noun",
           definition: "Discounted shopping period in January across London stores.",
@@ -299,14 +320,14 @@ const LONDON_VOCAB_DATA = {
             "Flip-flops and swimsuit"
           ],
           correct: 0,
-          explanation: "Winter in London is crisp and cool. Wearing layers allows you to stay warm outdoors and remove your coat inside warm shops!"
+          explanation: "Winter in London is crisp and cool. Wearing layers (vestir em camadas) allows you to stay warm!"
         },
         {
           id: "ws_q2",
           type: "fill_blank",
           sentence: "When buying clothes in Oxford Street, ask: 'Where is the _____ room?' to try them on.",
           correctAnswer: "fitting",
-          hint: "Starts with 'f' (fitting/trying room)."
+          hint: "Provador de roupa em inglês (fitting room)."
         }
       ]
     },
@@ -318,6 +339,7 @@ const LONDON_VOCAB_DATA = {
       words: [
         {
           word: "Cheers!",
+          ptTranslation: "Obrigado(a)! / Saúde! 🇵🇹",
           phonetic: "/tʃɪəz/",
           pos: "exclamation",
           definition: "Used as a friendly way to say 'Thank you', 'Goodbye', or when clinking glasses.",
@@ -326,6 +348,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Quid",
+          ptTranslation: "Libra (gíria informal para £1) 🇵🇹",
           phonetic: "/kwɪd/",
           pos: "noun (slang)",
           definition: "Informal British word for one Pound Sterling (£1).",
@@ -334,6 +357,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "The Loo",
+          ptTranslation: "O WC / Casa de Banho 🇵🇹",
           phonetic: "/ðə luː/",
           pos: "noun (slang)",
           definition: "Polite British informal word for the toilet/restroom.",
@@ -342,6 +366,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Sorted",
+          ptTranslation: "Resolvido / Tudo organizado 🇵🇹",
           phonetic: "/ˈsɔːtɪd/",
           pos: "adjective (slang)",
           definition: "Arranged, resolved, or successfully organized.",
@@ -350,6 +375,7 @@ const LONDON_VOCAB_DATA = {
         },
         {
           word: "Queue / Queueing",
+          ptTranslation: "Fila de espera / Fazer fila 🇵🇹",
           phonetic: "/kjuː/",
           pos: "noun/verb",
           definition: "A line of people waiting patiently for something.",
@@ -363,7 +389,7 @@ const LONDON_VOCAB_DATA = {
           type: "fill_blank",
           sentence: "If a Londoner says 'That sandwich costs five _____', they mean £5 sterling.",
           correctAnswer: "quid",
-          hint: "British informal word for pound."
+          hint: "Gíria britânica para libra (£1)."
         },
         {
           id: "slang_q2",
@@ -376,7 +402,7 @@ const LONDON_VOCAB_DATA = {
             "The Pub"
           ],
           correct: 0,
-          explanation: "'The Loo' is the friendly and polite British term for the toilet."
+          explanation: "'The Loo' é a palavra britânica amigável para casa de banho/WC."
         }
       ]
     }
@@ -392,7 +418,7 @@ const LONDON_VOCAB_DATA = {
           speaker: "Barista",
           line: "Good morning! Welcome to Soho Grind. Are you drinking in or taking away today?",
           options: [
-            { text: "Good morning! We'd like to drink in, please. Table for two?", correct: true, feedback: "Excellent! Friendly, polite, and clear." },
+            { text: "Good morning! We'd like to drink in, please. Table for two?", correct: true, feedback: "Excellent! Friendly, polite, and clear. (Excelente! Muito educado)." },
             { text: "Give me coffee now.", correct: false, feedback: "A bit too abrupt. In the UK, adding 'Good morning' and 'please' is customary!" }
           ]
         },
@@ -408,7 +434,7 @@ const LONDON_VOCAB_DATA = {
           speaker: "Barista",
           line: "Lovely choice! Would you like still or sparkling water with that?",
           options: [
-            { text: "Just a glass of tap water, please. Thank you!", correct: true, feedback: "Spot on! Free tap water is standard and polite." },
+            { text: "Just a glass of tap water, please. Thank you!", correct: true, feedback: "Spot on! Free tap water is standard and polite. (Água da torneira é grátis)." },
             { text: "No water, just money.", correct: false, feedback: "Not quite natural! Saying 'Just tap water, please' is the right response." }
           ]
         },
@@ -458,21 +484,25 @@ const LONDON_VOCAB_DATA = {
     {
       icon: "🧥",
       title: "Dressing for Jan/Feb Weather",
+      ptSubtitle: "Vestir-se para o tempo de Inverno",
       text: "Temperatures range between 3°C - 9°C (37°F - 48°F). Pack thermal base layers, a warm stylish coat, a soft scarf, gloves, and comfortable walking boots."
     },
     {
       icon: "☂️",
       title: "The Famous London Drizzle",
+      ptSubtitle: "O famoso chuvisco de Londres",
       text: "Rain in London winter is often a light drizzle. Always carry a compact umbrella or hooded jacket when exploring Oxford Street or Hyde Park."
     },
     {
       icon: "🚇",
       title: "Escalator Etiquette",
-      text: "On Tube escalators, ALWAYS stand on the RIGHT side. The left side is strictly reserved for commuters who are walking."
+      ptSubtitle: "Etiqueta nas escadas rolantes",
+      text: "On Tube escalators, ALWAYS stand on the RIGHT side. The left side is strictly reserved for commuters who are walking. (Fique sempre à direita)."
     },
     {
       icon: "☕",
       title: "Polite Language Power Words",
+      ptSubtitle: "Palavras mágicas de cortesia",
       text: "British conversation relies heavily on 'Please', 'Thank you', 'Excuse me', and 'Cheers'. Saying 'Sorry' when accidentally bumping into someone is essential etiquette!"
     }
   ]
@@ -481,4 +511,3 @@ const LONDON_VOCAB_DATA = {
 if (typeof module !== 'undefined') {
   module.exports = LONDON_VOCAB_DATA;
 }
-

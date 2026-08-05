@@ -385,6 +385,18 @@ h1, h2, h3, .serif-font {
   font-style: italic;
 }
 
+.card-pt-translation {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #c86b7b;
+  margin-top: 6px;
+  background: var(--primary-light);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+
 .card-hint-text {
   font-size: 0.82rem;
   color: var(--text-muted);
