@@ -152,6 +152,24 @@ const LONDON_VOCAB_DATA = {
           definition: "Smart card used to pay for Tube and bus travel in London.",
           example: "Gabriela tapped her Oyster Card at Notting Hill station.",
           tip: "You can also tap your contactless bank card or phone!"
+        },
+        {
+          word: "Contactless",
+          ptTranslation: "Pagamento por aproximação (sem contacto) 🇵🇹",
+          phonetic: "/ˈkɒntæktləs/",
+          pos: "adjective",
+          definition: "Paying by tapping a bank card or smartphone on a payment terminal without typing a PIN.",
+          example: "You can use contactless payment at all London Tube station gates.",
+          tip: "Works for buses, Tube, cafes, and shops across London!"
+        },
+        {
+          word: "Overground",
+          ptTranslation: "Comboios de superfície de Londres 🇵🇹",
+          phonetic: "/ˈəʊvəɡraʊnd/",
+          pos: "noun",
+          definition: "The orange-line suburban rail network in London.",
+          example: "Take the London Overground to visit trendy markets and local parks.",
+          tip: "Uses the same Oyster and Contactless system as the Tube!"
         }
       ],
       quizzes: [
@@ -235,6 +253,24 @@ const LONDON_VOCAB_DATA = {
           definition: "Asked when ordering water: carbonated (bubbly) vs non-carbonated (regular water).",
           example: "I would like a bottle of still water, please.",
           tip: "You can also ask for 'tap water' if you want free tap water!"
+        },
+        {
+          word: "Flat White",
+          ptTranslation: "Café com leite cremoso (estilo britânico) 🇵🇹",
+          phonetic: "/flæt waɪt/",
+          pos: "noun",
+          definition: "A popular espresso coffee drink prepared with steamed milk and fine microfoam.",
+          example: "Gabriela ordered an oat milk Flat White at Leicester Square Grind.",
+          tip: "Extremely popular coffee order in London cafes!"
+        },
+        {
+          word: "Scone",
+          ptTranslation: "Bolinho tradicional britânico de chá 🇵🇹",
+          phonetic: "/skɒn/",
+          pos: "noun",
+          definition: "A classic British baked cake eaten warm with clotted cream and strawberry jam.",
+          example: "Warm scones served with clotted cream and strawberry jam are delicious.",
+          tip: "Pronounced 'skon' or 'skohn'!"
         }
       ],
       quizzes: [

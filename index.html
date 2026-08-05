@@ -64,6 +64,9 @@
       <button class="tab-btn" data-tab="roleplays" role="tab">
         <span>🎭</span> Roleplay Simulator
       </button>
+      <button class="tab-btn" data-tab="gridgame" role="tab">
+        <span>🧩</span> Vocab Grid
+      </button>
       <button class="tab-btn" data-tab="tips" role="tab">
         <span>🧥</span> Winter London Tips
       </button>
@@ -154,6 +157,90 @@
           <div class="tips-grid" id="winter-tips-container">
             <!-- Rendered by JS -->
           </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: VOCAB GRID GAME -->
+      <section id="tab-gridgame" class="tab-content" role="tabpanel">
+        <div class="card-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title"><span>🧩</span> 5-Stage Vocab Grid Challenge</h2>
+              <p class="section-desc">Complete all 5 stages! Listen to the 5 target London words in each stage, find their coordinates on the 5x5 grid, and clear all 5 rounds!</p>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+              <div class="stat-pill" style="background: rgba(200, 107, 123, 0.1); border: 1px solid var(--border-color);">
+                <span>🏆 Total Grid Points: </span>
+                <strong id="grid-total-points-val" style="color: var(--primary);">0 pts</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5-Stage Progress Tracker Bar -->
+          <div class="stage-tracker-bar">
+            <div class="stage-tracker-info">
+              <span class="stage-title-label" id="stage-title-label">Stage 1 of 5</span>
+              <span class="stage-score-label" id="stage-score-label">Stage Score: 0 / 5</span>
+            </div>
+            <div class="stage-dots-container" id="stage-dots-container">
+              <!-- Rendered by JS: 5 stage dots -->
+            </div>
+          </div>
+
+          <!-- Audio Targets Bar -->
+          <div class="audio-targets-bar">
+            <div class="audio-targets-header">
+              <div class="audio-title">
+                <span class="pulse-icon">🔊</span> 
+                <strong>Listen to Target Words (5 Items for Stage <span id="current-stage-num">1</span>)</strong>
+              </div>
+              <div class="audio-actions">
+                <button class="btn-primary-sm" id="btn-play-all-targets">
+                  <span>▶️</span> Play All 5 Words
+                </button>
+              </div>
+            </div>
+            
+            <div class="target-chips-container" id="target-chips-container">
+              <!-- Rendered by JS: 5 target chips with play buttons -->
+            </div>
+          </div>
+
+          <!-- Game Controls & Status -->
+          <div class="grid-controls-row">
+            <div class="selection-status">
+              <span class="status-badge" id="grid-selection-count">Selected: 0 / 5 cells</span>
+            </div>
+            <div class="grid-actions">
+              <button class="btn-primary" id="btn-check-grid" disabled>
+                <span>✅</span> Check Stage Answers
+              </button>
+              <button class="btn-primary" id="btn-next-stage" style="display: none; background: #2e7d32;">
+                <span>➡️</span> Next Stage
+              </button>
+              <button class="btn-secondary" id="btn-restart-5stages">
+                <span>🔄</span> Restart 5-Stage Game
+              </button>
+            </div>
+          </div>
+
+          <!-- Result Feedback Banner (Per Stage) -->
+          <div class="grid-result-card" id="grid-result-card" style="display: none;">
+            <!-- JS dynamically injects result message -->
+          </div>
+
+          <!-- Final 5-Stage Completion Celebration Card -->
+          <div class="final-results-card" id="grid-final-results-card" style="display: none;">
+            <!-- JS dynamically injects overall 5-stage celebration -->
+          </div>
+
+          <!-- 5x5 Grid Board Wrapper -->
+          <div class="grid-game-wrapper">
+            <div class="grid-5x5-board" id="grid-5x5-board">
+              <!-- Rendered by JS: Column headers (1-5), Row headers (A-E), and 25 grid cells -->
+            </div>
+          </div>
+
         </div>
       </section>
 
