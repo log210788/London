@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabriela's London ESL & Travel Homework Hub 🇬🇧</title>
+  <meta name="description" content="Personalized ESL homework and travel vocabulary practice for Gabriela's upcoming trip to London in January/February.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Styling -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Hero Header Banner -->
+    <header class="hero-header">
+      <div class="hero-badge">
+        <span>🇬🇧 London Travel Companion</span>
+        <span>•</span>
+        <span>January / February Trip</span>
+      </div>
+      <h1 class="hero-title">Welcome, Gabriela! ✨</h1>
+      <p class="hero-subtitle">
+        Your interactive home for ESL homework and travel practice. Get ready for your dream trip to London with essential vocabulary, cafe dialogues, Tube guides, and winter travel tips!
+      </p>
+      
+      <div class="hero-stats-row">
+        <div class="stat-pill">
+          <span>🗓️ Trip:</span>
+          <strong>Jan / Feb</strong>
+        </div>
+        <div class="stat-pill">
+          <span>📍 Destination:</span>
+          <strong>London, UK</strong>
+        </div>
+        <div class="stat-pill">
+          <span>⭐ Homework Score:</span>
+          <strong id="header-score-val">0 pts</strong>
+        </div>
+        <div class="stat-pill">
+          <span>🏆 Progress:</span>
+          <strong id="header-progress-val">0%</strong>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" id="main-nav-tabs" role="tablist">
+      <button class="tab-btn active" data-tab="flashcards" role="tab">
+        <span>📚</span> Flashcards
+      </button>
+      <button class="tab-btn" data-tab="quizzes" role="tab">
+        <span>✏️</span> Homework Quizzes
+      </button>
+      <button class="tab-btn" data-tab="roleplays" role="tab">
+        <span>🎭</span> Roleplay Simulator
+      </button>
+      <button class="tab-btn" data-tab="tips" role="tab">
+        <span>🧥</span> Winter London Tips
+      </button>
+      <button class="tab-btn" data-tab="progress" role="tab">
+        <span>📊</span> My Progress
+      </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main>
+
+      <!-- TAB 1: FLASHCARDS -->
+      <section id="tab-flashcards" class="tab-content active" role="tabpanel">
+        <div class="card-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title"><span>📚</span> London Vocabulary Flashcards</h2>
+              <p class="section-desc">Tap any card to flip and discover the definition, example sentence, and British travel tip! Click the speaker icon to listen to British audio pronunciation.</p>
+            </div>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="category-filter" id="flashcard-category-filter">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Flashcards Grid -->
+          <div class="flashcards-grid" id="flashcards-container">
+            <!-- Flashcards rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: HOMEWORK QUIZZES -->
+      <section id="tab-quizzes" class="tab-content" role="tabpanel">
+        <div class="card-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title"><span>✏️</span> Interactive Homework Quizzes</h2>
+              <p class="section-desc">Complete these exercises to practice travel English for your trip. Your progress is saved automatically!</p>
+            </div>
+          </div>
+
+          <!-- Quiz Filter -->
+          <div class="category-filter" id="quiz-category-filter">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Quiz Questions Container -->
+          <div class="quiz-container" id="quiz-questions-container">
+            <!-- Quiz cards rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: ROLEPLAY SIMULATOR -->
+      <section id="tab-roleplays" class="tab-content" role="tabpanel">
+        <div class="card-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title"><span>🎭</span> Real-Life Dialogue Simulator</h2>
+              <p class="section-desc">Practice real conversation scenarios you will experience in London (e.g. at cafes and hotels).</p>
+            </div>
+          </div>
+
+          <!-- Roleplay Selector -->
+          <div class="category-filter" id="roleplay-selector">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Active Roleplay Container -->
+          <div id="active-roleplay-container">
+            <!-- Dialogue step rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: WINTER LONDON TIPS -->
+      <section id="tab-tips" class="tab-content" role="tabpanel">
+        <div class="card-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title"><span>🧥</span> London Winter Travel Guide</h2>
+              <p class="section-desc">Helpful weather advice, dressing tips, and cultural etiquette for your trip in January/February.</p>
+            </div>
+          </div>
+
+          <div class="tips-grid" id="winter-tips-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: MY PROGRESS & TEACHER EXPORT -->
+      <section id="tab-progress" class="tab-content" role="tabpanel">
+        <div class="card-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title"><span>📊</span> Gabriela's Homework Progress</h2>
+              <p class="section-desc">Review your completed homework score, download your homework file, and upload it to Preply for your teacher!</p>
+            </div>
+          </div>
+
+          <div class="progress-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 600;">
+              <span>Overall Homework Completion</span>
+              <span id="progress-percent-label">0%</span>
+            </div>
+            
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+
+            <h3 class="serif-font" style="margin-bottom: 12px; color: var(--primary);">📋 Homework Summary Report</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+              You can copy your report or download it as a document file to send to your teacher on Preply!
+            </p>
+
+            <div class="homework-summary-box" id="summary-report-text">
+              Generating your report...
+            </div>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px;">
+              <button class="btn-primary" id="btn-download-report">
+                <span>📥</span> Download Homework (.txt)
+              </button>
+              <button class="btn-secondary" id="btn-copy-report">
+                <span>📋</span> Copy Text Report
+              </button>
+              <button class="btn-secondary" id="btn-reset-progress" style="margin-left: auto;">
+                <span>🔄</span> Reset Progress
+              </button>
+            </div>
+
+            <!-- Preply Upload Guide Callout -->
+            <div class="preply-guide-card">
+              <div class="preply-guide-header">
+                <span class="preply-logo-badge">Preply 🎓</span>
+                <h3 class="serif-font" style="font-size: 1.25rem; color: var(--text-dark); margin: 0;">
+                  How to Upload Your Homework on Preply
+                </h3>
+              </div>
+              <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
+                Follow these simple steps to send your completed London homework to your teacher on Preply:
+              </p>
+
+              <div class="preply-steps-grid">
+                <div class="preply-step-item">
+                  <div class="step-num">Step 1</div>
+                  <div class="step-icon">📥</div>
+                  <div class="step-title">Download File</div>
+                  <div class="step-desc">Click the pink <strong>"Download Homework (.txt)"</strong> button above to save your homework report onto your phone or computer.</div>
+                </div>
+
+                <div class="preply-step-item">
+                  <div class="step-num">Step 2</div>
+                  <div class="step-icon">💬</div>
+                  <div class="step-title">Open Preply Chat</div>
+                  <div class="step-desc">Log into <strong>Preply</strong> app or website and open the chat message window with your English teacher.</div>
+                </div>
+
+                <div class="preply-step-item">
+                  <div class="step-num">Step 3</div>
+                  <div class="step-icon">📎</div>
+                  <div class="step-title">Attach Document</div>
+                  <div class="step-desc">Click the paperclip or plus icon <strong>(📎)</strong> next to the message box and select your downloaded file (<code>Gabriela_London_ESL_Homework.txt</code>).</div>
+                </div>
+
+                <div class="preply-step-item">
+                  <div class="step-num">Step 4</div>
+                  <div class="step-icon">🚀</div>
+                  <div class="step-title">Send & Celebrate!</div>
+                  <div class="step-desc">Press <strong>Send</strong>! Your teacher will receive your full score breakdown and quiz answers.</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Made with ❤️ for <strong>Gabriela's London Trip</strong> • ESL Travel Companion</p>
+      <p style="margin-top: 4px; opacity: 0.8;">Hosted on GitHub Pages • <a href="https://github.com/log210788/London" target="_blank">github.com/log210788/London</a></p>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript Scripts -->
+  <script src="vocabulary-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
