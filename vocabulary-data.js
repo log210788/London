@@ -6,178 +6,200 @@ const LONDON_VOCAB_DATA = {
   
   categories: [
     {
-      id: "airport",
-      title: "Airport & Arrival",
-      icon: "✈️",
-      description: "Essential vocabulary for navigating Heathrow/Gatwick airport and border control.",
+      id: "landmarks",
+      title: "Landmarks & Places",
+      icon: "🏰",
+      description: "Famous London sights and neighborhoods Gabriela will visit during her trip.",
       words: [
         {
-          word: "Passport Control",
-          ptTranslation: "Controlo de Passaportes 🇵🇹",
-          phonetic: "/ˈpɑːspɔːt kənˈtrəʊl/",
+          word: "Buckingham Palace",
+          ptTranslation: "Palácio de Buckingham (Residência Real) 🇵🇹",
+          phonetic: "/ˈbʌkɪŋəm ˈpælɪs/",
           pos: "noun",
-          definition: "The place at an airport where officials check your passport.",
-          example: "Please have your passport open at passport control.",
-          tip: "Keep your return ticket and hotel address details handy here!"
+          definition: "The official London residence of the British monarch.",
+          example: "Gabriela watched the Changing of the Guard outside Buckingham Palace.",
+          tip: "Located near Victoria and St James's Park stations!"
         },
         {
-          word: "Baggage Reclaim",
-          ptTranslation: "Recolha de Bagagem 🇵🇹",
-          phonetic: "/ˈbæɡɪdʒ rɪˈkleɪm/",
+          word: "Natural History Museum",
+          ptTranslation: "Museu de História Natural 🇵🇹",
+          phonetic: "/ˈnætʃrəl ˈhɪstri mjuːˈziːəm/",
           pos: "noun",
-          definition: "The area in an airport where arriving passengers collect luggage.",
-          example: "Our suitcases should be at baggage reclaim belt number 4.",
-          tip: "Look for the luggage symbol on airport signs."
+          definition: "A famous world-class museum in South Kensington known for dinosaur skeletons and architecture.",
+          example: "Admission to the Natural History Museum is free!",
+          tip: "Take the Tube to South Kensington station."
         },
         {
-          word: "Customs",
-          ptTranslation: "Alfândega 🇵🇹",
-          phonetic: "/ˈkʌstəmz/",
+          word: "Leicester Square",
+          ptTranslation: "Leicester Square (Praça dos teatros e cinemas) 🇵🇹",
+          phonetic: "/ˈlestə skweə/",
           pos: "noun",
-          definition: "The officer or place where goods brought into a country are checked.",
-          example: "Walk through the green channel if you have nothing to declare at customs.",
-          tip: "Green channel = Nothing to declare. Red channel = Goods to declare."
+          definition: "A vibrant square in central London famous for West End theaters, film premieres, and shops.",
+          example: "Let's meet at Leicester Square for a musical show in the evening.",
+          tip: "Pronounced 'Lester Square' (not Lay-ces-ter)!"
         },
         {
-          word: "Purpose of visit",
-          ptTranslation: "Motivo da viagem / visita 🇵🇹",
-          phonetic: "/ˈpɜːpəs əv ˈvɪzɪt/",
-          pos: "phrase",
-          definition: "The main reason why you are traveling to a country.",
-          example: "My purpose of visit is tourism and sightseeing for two weeks.",
-          tip: "Answer clearly: 'I am here on vacation' or 'I am visiting for sightseeing'."
+          word: "Notting Hill",
+          ptTranslation: "Bairro de Notting Hill 🇵🇹",
+          phonetic: "/ˈnɒtɪŋ hɪl/",
+          pos: "noun",
+          definition: "A charming neighborhood famous for pastel-colored houses and Portobello Road Market.",
+          example: "Gabriela loves taking photos of the colorful houses in Notting Hill.",
+          tip: "Take the Central line or District line to Notting Hill Gate station."
         },
         {
-          word: "Accommodation",
-          ptTranslation: "Alojamento / Hotel 🇵🇹",
-          phonetic: "/əˌkɒməˈdeɪʃn/",
+          word: "Covent Garden",
+          ptTranslation: "Covent Garden (Mercado e zona pedonal) 🇵🇹",
+          phonetic: "/ˈkɒvənt ˈɡɑːdn/",
           pos: "noun",
-          definition: "A place to live or stay, such as a hotel or apartment.",
-          example: "I have booked accommodation at a boutique hotel in central London.",
-          tip: "Border control officers often ask for your hotel name and postcode."
+          definition: "A famous shopping and entertainment hub with street performers and cozy cafes.",
+          example: "We had afternoon tea near the historic market in Covent Garden.",
+          tip: "Great place for shopping and watching street artists!"
         }
       ],
       quizzes: [
         {
-          id: "air_q1",
+          id: "landmark_q1",
           type: "mcq",
-          question: "When the border control officer asks 'What is the purpose of your visit?', how should Gabriela answer?",
+          question: "Which famous London residence of the King is located near St James's Park?",
           options: [
-            "I am here for tourism and vacation.",
-            "I want a cup of tea please.",
-            "My baggage is over there.",
-            "Where is the Tube station?"
+            "Buckingham Palace",
+            "Natural History Museum",
+            "Leicester Square",
+            "Notting Hill Gate"
           ],
           correct: 0,
-          explanation: "State clearly that you are traveling for tourism/vacation. (Resposta: Estou aqui de férias/turismo)."
+          explanation: "Buckingham Palace is the official London residence of the monarch. (Palácio de Buckingham)."
         },
         {
-          id: "air_q2",
+          id: "landmark_q2",
           type: "fill_blank",
-          sentence: "After landing, walk to _____ Reclaim to pick up your luggage.",
-          correctAnswer: "Baggage",
-          hint: "Starts with 'B' (Recolha de bagagem)."
+          sentence: "To see dinosaur skeletons and beautiful architecture, visit the Natural History _____ in South Kensington.",
+          correctAnswer: "Museum",
+          hint: "Starts with 'M' (Museu)."
         },
         {
-          id: "air_q3",
+          id: "landmark_q3",
           type: "mcq",
-          question: "If you have no goods or items that need taxes paid, which channel do you walk through at UK Customs?",
+          question: "How do Londoners pronounce 'Leicester Square'?",
           options: [
-            "Red Channel",
-            "Green Channel",
-            "Blue Channel",
-            "Gold Channel"
+            "Lester Square",
+            "Lay-ces-ter Square",
+            "Lee-chester Square",
+            "Lie-ces-ter Square"
           ],
-          correct: 1,
-          explanation: "The Green Channel is for passengers with 'Nothing to Declare' (Nada a declarar)."
+          correct: 0,
+          explanation: "Leicester Square is pronounced 'Lester Square'! (Pronuncia-se 'Lester')."
         }
       ]
     },
     {
       id: "tube",
-      title: "The Tube & Transport",
+      title: "Tube Directions & Transport",
       icon: "🚇",
-      description: "Mastering the London Underground, Oyster Cards, and buses like a local.",
+      description: "Navigating London using Northbound, Southbound, Eastbound, and Westbound train lines.",
       words: [
+        {
+          word: "Westbound",
+          ptTranslation: "Direção Oeste (Sentido Oeste) 🇵🇹",
+          phonetic: "/ˈwestbaʊnd/",
+          pos: "adjective",
+          definition: "Traveling towards the west.",
+          example: "Take the Westbound Central line to go to Notting Hill Gate.",
+          tip: "Check platform signs for 'Westbound' before stepping onto the train."
+        },
+        {
+          word: "Eastbound",
+          ptTranslation: "Direção Este / Leste 🇵🇹",
+          phonetic: "/ˈiːstbaʊnd/",
+          pos: "adjective",
+          definition: "Traveling towards the east.",
+          example: "The Eastbound Piccadilly line takes you from Hyde Park Corner to Leicester Square.",
+          tip: "Eastbound trains travel towards Covent Garden and the City of London."
+        },
+        {
+          word: "Northbound",
+          ptTranslation: "Direção Norte (Sentido Norte) 🇵🇹",
+          phonetic: "/ˈnɔːθbaʊnd/",
+          pos: "adjective",
+          definition: "Traveling towards the north.",
+          example: "Take the Northbound Northern Line from Waterloo to Leicester Square.",
+          tip: "Look for Northbound platform signs when heading towards Camden or King's Cross."
+        },
+        {
+          word: "Southbound",
+          ptTranslation: "Direção Sul (Sentido Sul) 🇵🇹",
+          phonetic: "/ˈsaʊθbaʊnd/",
+          pos: "adjective",
+          definition: "Traveling towards the south.",
+          example: "To go to the Natural History Museum, take a Southbound train to South Kensington.",
+          tip: "Southbound trains head across the River Thames towards South London."
+        },
         {
           word: "Mind the gap",
           ptTranslation: "Atenção ao vão (entre o comboio e a plataforma) 🇵🇹",
           phonetic: "/maɪnd ðə ɡæp/",
           pos: "phrase",
-          definition: "A famous warning spoken at Tube stations to watch the space between the train and platform.",
-          example: "Please mind the gap between the train and the platform.",
-          tip: "You will hear this automated announcement at almost every London Tube station!"
+          definition: "A famous warning spoken at Tube stations to watch the space between train and platform.",
+          example: "Please mind the gap when boarding the train at Leicester Square.",
+          tip: "Automated message heard at every station!"
         },
         {
           word: "Oyster Card",
-          ptTranslation: "Cartão Oyster (cartão de transportes de Londres) 🇵🇹",
+          ptTranslation: "Cartão Oyster (cartão de transportes) 🇵🇹",
           phonetic: "/ˈɔɪstə kɑːd/",
           pos: "noun",
-          definition: "A smart card used to pay for public transport in London.",
-          example: "I tap my Oyster Card at the yellow reader to enter the station.",
-          tip: "You can also tap your contactless bank card or phone on the yellow card readers."
-        },
-        {
-          word: "Platform",
-          ptTranslation: "Plataforma / Cais de embarque 🇵🇹",
-          phonetic: "/ˈplætfɔːm/",
-          pos: "noun",
-          definition: "The area where passengers wait for a train.",
-          example: "The eastbound Piccadilly line train leaves from platform 2.",
-          tip: "Check whether you need Northbound, Southbound, Eastbound, or Westbound."
-        },
-        {
-          word: "Double-decker",
-          ptTranslation: "Autocarro vermelho de dois andares 🇵🇹",
-          phonetic: "/ˌdʌbl ˈdekə/",
-          pos: "noun",
-          definition: "The iconic red two-story bus in London.",
-          example: "Gabriela sat on the top floor of the red double-decker bus for a great view!",
-          tip: "Sit at the very front of the top deck for the best sightseeing view."
-        },
-        {
-          word: "Change lines",
-          ptTranslation: "Mudar de linha / Fazer transbordo 🇵🇹",
-          phonetic: "/tʃeɪndʒ laɪnz/",
-          pos: "verb phrase",
-          definition: "To transfer from one underground train line to another at an interchange station.",
-          example: "At King's Cross station, we need to change lines to the Victoria Line.",
-          tip: "Follow the colored signs inside the station to find your interchange line."
+          definition: "Smart card used to pay for Tube and bus travel in London.",
+          example: "Gabriela tapped her Oyster Card at Notting Hill station.",
+          tip: "You can also tap your contactless bank card or phone!"
         }
       ],
       quizzes: [
         {
           id: "tube_q1",
-          type: "fill_blank",
-          sentence: "At London underground stations, always '_____ the gap' when stepping onto the train.",
-          correctAnswer: "Mind",
-          hint: "Means 'Atenção a' or 'Cuidado com'."
+          type: "mcq",
+          question: "Gabriela is at Oxford Circus and wants to go west to Notting Hill Gate. Which platform direction should she follow?",
+          options: [
+            "Westbound",
+            "Eastbound",
+            "Northbound",
+            "Southbound"
+          ],
+          correct: 0,
+          explanation: "Notting Hill is in West London, so follow signs for the Westbound platform! (Direção Oeste)."
         },
         {
           id: "tube_q2",
-          type: "mcq",
-          question: "Where should you tap your Oyster card or phone to pay for your journey?",
-          options: [
-            "On the yellow reader at the ticket gates",
-            "Show it to the train driver",
-            "Give it to the police officer",
-            "Scan it at a grocery store"
-          ],
-          correct: 0,
-          explanation: "Always tap in and tap out on the yellow circular readers at the station gates."
+          type: "fill_blank",
+          sentence: "To travel towards King's Cross station in North London, follow signs for the _____ platform.",
+          correctAnswer: "Northbound",
+          hint: "Direction going North (Norte)."
         },
         {
           id: "tube_q3",
           type: "mcq",
-          question: "Which escalator rule is strictly followed in London Tube stations?",
+          question: "Gabriela wants to travel from Piccadilly Circus to Leicester Square (heading east). Which direction is the train?",
           options: [
-            "Stand on the left, walk on the right",
-            "Stand on the right, walk on the left",
-            "Stand in the middle",
-            "Run down as fast as possible"
+            "Eastbound",
+            "Westbound",
+            "Southbound",
+            "Northbound"
           ],
-          correct: 1,
-          explanation: "In London, stand on the RIGHT side if you want to stand still; keep the left side open for people walking! (Fique à direita se estiver parado)."
+          correct: 0,
+          explanation: "Leicester Square is east of Piccadilly Circus, so follow the Eastbound Piccadilly line platform! (Direção Este)."
+        },
+        {
+          id: "tube_q4",
+          type: "mcq",
+          question: "Which Tube station stop should Gabriela use to visit the Natural History Museum?",
+          options: [
+            "South Kensington",
+            "Baker Street",
+            "London Bridge",
+            "King's Cross"
+          ],
+          correct: 0,
+          explanation: "South Kensington station is right next to the Natural History Museum! (Estação de South Kensington)."
         }
       ]
     },
@@ -185,7 +207,7 @@ const LONDON_VOCAB_DATA = {
       id: "cafe",
       title: "Cafes & Dining",
       icon: "☕",
-      description: "Ordering tea, coffee, scones, and polite restaurant dining.",
+      description: "Ordering tea, coffee, scones, and polite restaurant dining in London.",
       words: [
         {
           word: "Afternoon Tea",
@@ -277,7 +299,7 @@ const LONDON_VOCAB_DATA = {
           phonetic: "/ˈdrɪzl/",
           pos: "noun/verb",
           definition: "Light, fine rain falling continuously.",
-          example: "It's drizzling outside, so carry a lightweight umbrella in your bag.",
+          example: "It's drizzling outside near Buckingham Palace, so carry a lightweight umbrella.",
           tip: "London winter often brings light drizzle rather than heavy snow."
         },
         {
@@ -295,7 +317,7 @@ const LONDON_VOCAB_DATA = {
           phonetic: "/rɪˈsiːt/",
           pos: "noun",
           definition: "A printed paper showing proof of payment.",
-          example: "Keep your receipt if you want to claim tax-free refund or exchange items.",
+          example: "Keep your receipt if you buy clothes in Notting Hill or Covent Garden.",
           tip: "Notice the 'p' is silent! Pronounced /rɪ-seet/."
         },
         {
@@ -312,7 +334,7 @@ const LONDON_VOCAB_DATA = {
         {
           id: "ws_q1",
           type: "mcq",
-          question: "What is the best way for Gabriela to dress for London weather in January/February?",
+          question: "What is the best way for Gabriela to dress for walking around Buckingham Palace in January/February?",
           options: [
             "Wear layers (thermal top, warm jumper/sweater, stylish coat, and scarf)",
             "Just a light t-shirt and shorts",
@@ -325,7 +347,7 @@ const LONDON_VOCAB_DATA = {
         {
           id: "ws_q2",
           type: "fill_blank",
-          sentence: "When buying clothes in Oxford Street, ask: 'Where is the _____ room?' to try them on.",
+          sentence: "When buying clothes in Oxford Street or Notting Hill, ask: 'Where is the _____ room?' to try them on.",
           correctAnswer: "fitting",
           hint: "Provador de roupa em inglês (fitting room)."
         }
@@ -352,7 +374,7 @@ const LONDON_VOCAB_DATA = {
           phonetic: "/kwɪd/",
           pos: "noun (slang)",
           definition: "Informal British word for one Pound Sterling (£1).",
-          example: "This sandwich costs five quid (£5).",
+          example: "This souvenir costs five quid (£5).",
           tip: "10 quid = £10. It never takes an 's' at the end ('10 quid', not '10 quids')."
         },
         {
@@ -361,7 +383,7 @@ const LONDON_VOCAB_DATA = {
           phonetic: "/ðə luː/",
           pos: "noun (slang)",
           definition: "Polite British informal word for the toilet/restroom.",
-          example: "Excuse me, where is the loo?",
+          example: "Excuse me, where is the loo near Leicester Square?",
           tip: "Very natural and polite word used everywhere in the UK."
         },
         {
@@ -370,7 +392,7 @@ const LONDON_VOCAB_DATA = {
           phonetic: "/ˈsɔːtɪd/",
           pos: "adjective (slang)",
           definition: "Arranged, resolved, or successfully organized.",
-          example: "My hotel reservation is all sorted!",
+          example: "My hotel reservation and museum tickets are all sorted!",
           tip: "If someone says 'That's all sorted!', it means everything is taken care of."
         },
         {
@@ -379,7 +401,7 @@ const LONDON_VOCAB_DATA = {
           phonetic: "/kjuː/",
           pos: "noun/verb",
           definition: "A line of people waiting patiently for something.",
-          example: "Please join the queue to buy tickets for the London Eye.",
+          example: "Please join the queue to enter the Natural History Museum.",
           tip: "Queueing politely is a sacred British tradition. Always wait your turn!"
         }
       ],
@@ -387,14 +409,14 @@ const LONDON_VOCAB_DATA = {
         {
           id: "slang_q1",
           type: "fill_blank",
-          sentence: "If a Londoner says 'That sandwich costs five _____', they mean £5 sterling.",
+          sentence: "If a Londoner near Leicester Square says 'That theater ticket costs twenty _____', they mean £20.",
           correctAnswer: "quid",
           hint: "Gíria britânica para libra (£1)."
         },
         {
           id: "slang_q2",
           type: "mcq",
-          question: "What is a polite British word for restroom / toilet?",
+          question: "What is a polite British word for restroom / toilet when visiting London landmarks?",
           options: [
             "The Loo",
             "The Bank",
@@ -411,12 +433,12 @@ const LONDON_VOCAB_DATA = {
   roleplays: [
     {
       id: "rp_cafe",
-      title: "☕ Ordering Coffee & Scones at a Soho Cafe",
-      description: "Practice ordering food and drinks in a cozy London cafe.",
+      title: "☕ Ordering Coffee near Leicester Square",
+      description: "Practice ordering food and drinks in a cozy West End London cafe.",
       steps: [
         {
           speaker: "Barista",
-          line: "Good morning! Welcome to Soho Grind. Are you drinking in or taking away today?",
+          line: "Good morning! Welcome to Leicester Square Grind. Are you drinking in or taking away today?",
           options: [
             { text: "Good morning! We'd like to drink in, please. Table for two?", correct: true, feedback: "Excellent! Friendly, polite, and clear. (Excelente! Muito educado)." },
             { text: "Give me coffee now.", correct: false, feedback: "A bit too abrupt. In the UK, adding 'Good morning' and 'please' is customary!" }
@@ -448,32 +470,31 @@ const LONDON_VOCAB_DATA = {
       ]
     },
     {
-      id: "rp_hotel",
-      title: "🏨 Checking into your London Hotel",
-      description: "Practice arriving at your boutique London hotel receptionist.",
+      id: "rp_directions",
+      title: "🗺️ Asking Directions to Buckingham Palace & Notting Hill",
+      description: "Practice asking London locals for Tube lines and cardinal directions.",
       steps: [
         {
-          speaker: "Receptionist",
-          line: "Good afternoon, welcome to The Covent Garden Hotel! How may I assist you today?",
+          speaker: "Londoner",
+          line: "Excuse me, love! You look a bit lost. Can I help you with directions?",
           options: [
-            { text: "Hello! Good afternoon. I have a reservation under the name Gabriela.", correct: true, feedback: "Perfect greeting and clear reservation mention." },
-            { text: "I need a room.", correct: false, feedback: "Stating you already have a reservation under your name is more helpful." }
+            { text: "Hello! Yes please, which platform should I take for the Westbound train to Notting Hill?", correct: true, feedback: "Fantastic question! Clear and polite." },
+            { text: "Where am I?", correct: false, feedback: "Asking specifically for directions (e.g. 'Westbound to Notting Hill') is clearer." }
           ]
         },
         {
-          speaker: "Receptionist",
-          line: "Ah yes, Miss Gabriela! We have your reservation for 5 nights. May I please see your passport?",
+          speaker: "Londoner",
+          line: "Follow the red Central line signs over there and head down to the Westbound platform!",
           options: [
-            { text: "Here you go! Here is my passport.", correct: true, feedback: "Polite and helpful!" },
-            { text: "Why do you need it?", correct: false, feedback: "Hotels in the UK require passport identification at check-in for guest registration." }
+            { text: "Thank you so much! And is South Kensington near the Natural History Museum?", correct: true, feedback: "Brilliant follow-up question!" },
+            { text: "Okay bye.", correct: false, feedback: "Saying 'Thank you so much!' or 'Have a great day!' is much warmer." }
           ]
         },
         {
-          speaker: "Receptionist",
-          line: "Thank you. Here is your keycard for Room 304 on the 3rd floor. Breakfast is served from 7:00 to 10:30 AM in the lounge. Enjoy your stay!",
+          speaker: "Londoner",
+          line: "Yes, exactly! Get off at South Kensington station and follow the underground walkway straight into the museum.",
           options: [
-            { text: "Thank you so much! What time does the Underground station close nearby?", correct: true, feedback: "Great follow-up travel question!" },
-            { text: "Okay bye.", correct: false, feedback: "'Thank you so much!' or 'Have a lovely day' is warmer!" }
+            { text: "Wonderful! Thank you for your help. Cheers!", correct: true, feedback: "Spot on! Perfect polite British farewell." }
           ]
         }
       ]
@@ -482,22 +503,22 @@ const LONDON_VOCAB_DATA = {
 
   winterTips: [
     {
-      icon: "🧥",
-      title: "Dressing for Jan/Feb Weather",
-      ptSubtitle: "Vestir-se para o tempo de Inverno",
-      text: "Temperatures range between 3°C - 9°C (37°F - 48°F). Pack thermal base layers, a warm stylish coat, a soft scarf, gloves, and comfortable walking boots."
-    },
-    {
-      icon: "☂️",
-      title: "The Famous London Drizzle",
-      ptSubtitle: "O famoso chuvisco de Londres",
-      text: "Rain in London winter is often a light drizzle. Always carry a compact umbrella or hooded jacket when exploring Oxford Street or Hyde Park."
+      icon: "🏰",
+      title: "Visiting London Sights",
+      ptSubtitle: "Visitar os Pontos Turísticos",
+      text: "Buckingham Palace, Natural History Museum, and Leicester Square are in Central London. Book free tickets online for Natural History Museum entry!"
     },
     {
       icon: "🚇",
-      title: "Escalator Etiquette",
-      ptSubtitle: "Etiqueta nas escadas rolantes",
-      text: "On Tube escalators, ALWAYS stand on the RIGHT side. The left side is strictly reserved for commuters who are walking. (Fique sempre à direita)."
+      title: "Tube Directions (North/South/East/West)",
+      ptSubtitle: "Direções no Metro de Londres",
+      text: "Tube platform signs always show Northbound, Southbound, Eastbound, or Westbound. To go to Notting Hill from central London, follow Westbound!"
+    },
+    {
+      icon: "🧥",
+      title: "Dressing for Jan/Feb Weather",
+      ptSubtitle: "Vestir-se para o tempo de Inverno",
+      text: "Temperatures range between 3°C - 9°C (37°F - 48°F). Pack thermal base layers, a warm coat, scarf, gloves, and comfortable walking shoes."
     },
     {
       icon: "☕",
