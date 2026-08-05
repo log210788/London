@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --------------------------------------------------------------------------
      1. British Audio Pronunciation (Web Speech API)
      -------------------------------------------------------------------------- */
-  function speakWord(text) {
+  function speakWord(text, onEndCallback) {
     if (!('speechSynthesis' in window)) {
-      alert('Speech synthesis is not supported in this browser.');
+      if (typeof onEndCallback === 'function') onEndCallback();
       return;
     }
     window.speechSynthesis.cancel(); // Stop ongoing speech
@@ -51,6 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = 0.88; // Slightly relaxed pace for ESL learners
     utterance.pitch = 1.0;
+
+    let hasEnded = false;
+    const safeEnd = () => {
+      if (!hasEnded) {
+        hasEnded = true;
+        if (typeof onEndCallback === 'function') onEndCallback();
+      }
+    };
+
+    utterance.onend = safeEnd;
+    utterance.onerror = safeEnd;
 
     // Search for British English voice
     const voices = window.speechSynthesis.getVoices();
@@ -62,7 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.speechSynthesis.speak(utterance);
+
+    // Fallback safety timeout if browser fails to trigger onend
+    if (typeof onEndCallback === 'function') {
+      const estimatedDurationMs = Math.max(2500, text.length * 110);
+      setTimeout(safeEnd, estimatedDurationMs + 1000);
+    }
   }
+
 
   // Pre-load voices
   if ('speechSynthesis' in window) {
@@ -419,18 +437,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (choice.correct) {
       feedbackEl.className = 'feedback-msg show-success';
       feedbackEl.innerHTML = `🎉 ${choice.feedback}`;
-      speakWord(choice.text);
-
-      setTimeout(() => {
-        state.roleplayProgress[rpId] = currentStepIdx + 1;
-        saveState();
-        renderRoleplayStep();
-      }, 1800);
+      
+      // Speak full response and wait for audio to finish before advancing
+      speakWord(choice.text, () => {
+        setTimeout(() => {
+          state.roleplayProgress[rpId] = currentStepIdx + 1;
+          saveState();
+          renderRoleplayStep();
+        }, 600);
+      });
     } else {
       feedbackEl.className = 'feedback-msg show-error';
       feedbackEl.innerHTML = `💡 ${choice.feedback}`;
     }
   };
+
 
   window.restartRoleplay = (rpId) => {
     state.roleplayProgress[rpId] = 0;
