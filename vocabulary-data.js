@@ -420,12 +420,13 @@ const LONDON_VOCAB_DATA = {
       steps: [
         {
           speaker: "Barista",
-          line: "Good morning! Welcome to Leicester Square Grind. Are you drinking in or taking away today?",
+          line: "Good morning! Welcome to Leicester Square Grind. Are you dining in today?",
           options: [
-            { text: "Good morning! We'd like to drink in, please. Table for two?", correct: true, feedback: "Excellent! Friendly, polite, and clear. (Excelente! Muito educado)." },
+            { text: "Good morning! We'd like to dine in, please. Table for two?", correct: true, feedback: "Excellent! Friendly, polite, and clear. (Excelente! Muito educado)." },
             { text: "Give me coffee now.", correct: false, feedback: "A bit too abrupt. In the UK, adding 'Good morning' and 'please' is customary!" }
           ]
         },
+
         {
           speaker: "Barista",
           line: "Right this way! What can I get started for you?",
