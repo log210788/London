@@ -176,19 +176,6 @@ const LONDON_VOCAB_DATA = {
           hint: "Direction going North (Norte)."
         },
         {
-          id: "tube_q3",
-          type: "mcq",
-          question: "Gabriela wants to travel from Piccadilly Circus to Leicester Square (heading east). Which direction is the train?",
-          options: [
-            "Eastbound",
-            "Westbound",
-            "Southbound",
-            "Northbound"
-          ],
-          correct: 0,
-          explanation: "Leicester Square is east of Piccadilly Circus, so follow the Eastbound Piccadilly line platform! (Direção Este)."
-        },
-        {
           id: "tube_q4",
           type: "mcq",
           question: "Which Tube station stop should Gabriela use to visit the Natural History Museum?",
@@ -203,6 +190,7 @@ const LONDON_VOCAB_DATA = {
         }
       ]
     },
+
     {
       id: "cafe",
       title: "Cafes & Dining",
