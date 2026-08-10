@@ -55,20 +55,26 @@
 
     <!-- Navigation Tabs -->
     <nav class="nav-tabs" id="main-nav-tabs" role="tablist">
-      <button class="tab-btn active" data-tab="flashcards" role="tab">
+      <button class="tab-btn active" data-tab="visuals" role="tab">
+        <span>🌸</span> Visual Learning Aids
+      </button>
+      <button class="tab-btn" data-tab="teacherplan" role="tab">
+        <span>🍎</span> Teacher Lesson Plan
+      </button>
+      <button class="tab-btn" data-tab="flashcards" role="tab">
         <span>📚</span> Flashcards
       </button>
       <button class="tab-btn" data-tab="quizzes" role="tab">
         <span>✏️</span> Homework Quizzes
       </button>
       <button class="tab-btn" data-tab="roleplays" role="tab">
-        <span>🎭</span> Roleplay Simulator
+        <span>🎭</span> Roleplays
       </button>
       <button class="tab-btn" data-tab="gridgame" role="tab">
         <span>🧩</span> Vocab Grid
       </button>
       <button class="tab-btn" data-tab="tips" role="tab">
-        <span>🧥</span> Winter London Tips
+        <span>🧥</span> Winter Tips
       </button>
       <button class="tab-btn" data-tab="progress" role="tab">
         <span>📊</span> My Progress
@@ -78,8 +84,40 @@
     <!-- Main Content Area -->
     <main>
 
+      <!-- TAB 0A: VISUAL LEARNING AIDS FOR GABRIELA -->
+      <section id="tab-visuals" class="tab-content active" role="tabpanel">
+        <div class="card-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title"><span>🌸</span> Visual Learning Cards for Gabriela</h2>
+              <p class="section-desc">Interactive visual cards with high-definition London travel scenes, target vocabulary, British pronunciation audio, and speaking triggers for Preply class.</p>
+            </div>
+          </div>
+
+          <div class="visual-cards-grid" id="visual-cards-container">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 0B: TEACHER LESSON PLAN -->
+      <section id="tab-teacherplan" class="tab-content" role="tabpanel">
+        <div class="card-section">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title"><span>🍎</span> Preply 50-Minute Lesson Plan & Notes</h2>
+              <p class="section-desc">A structured teaching guide for Gabriela's 1-on-1 Preply tutor, including warm-up prompts, timing breakdown, roleplay instructions, error corrections, and homework assignments.</p>
+            </div>
+          </div>
+
+          <div class="teacher-plan-container" id="teacher-plan-container">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+      </section>
+
       <!-- TAB 1: FLASHCARDS -->
-      <section id="tab-flashcards" class="tab-content active" role="tabpanel">
+      <section id="tab-flashcards" class="tab-content" role="tabpanel">
         <div class="card-section">
           <div class="section-header">
             <div>

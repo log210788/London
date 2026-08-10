@@ -545,7 +545,130 @@ const LONDON_VOCAB_DATA = {
       ptSubtitle: "Palavras mágicas de cortesia",
       text: "British conversation relies heavily on 'Please', 'Thank you', 'Excuse me', and 'Cheers'. Saying 'Sorry' when accidentally bumping into someone is essential etiquette!"
     }
-  ]
+  ],
+
+  visualCards: [
+    {
+      id: "vis_tea",
+      title: "Traditional British Afternoon Tea 🫖",
+      subtitle: "Covent Garden & Kensington Tea Salons",
+      image: "images/afternoon_tea.jpg",
+      badge: "Culinary & Social Etiquette",
+      ptTranslation: "Chá da Tarde Tradicional Inglês 🇵🇹",
+      description: "An elegant British tradition featuring tiered stands of warm scones with clotted cream, berry jam, delicate finger sandwiches, and fragrant Earl Grey or English Breakfast tea.",
+      targetVocab: [
+        { word: "Scone", translation: "Bolinho tradicional de chá", phonetic: "/skɒn/" },
+        { word: "Clotted Cream", translation: "Creme de leite espesso britânico", phonetic: "/ˈklɒtɪd kriːm/" },
+        { word: "Tiered Stand", translation: "Prato de servir em camadas", phonetic: "/tɪəd stænd/" },
+        { word: "Finger Sandwiches", translation: "Mini sanduíches sem côdea", phonetic: "/ˈfɪŋɡə ˈsænwɪdʒɪz/" }
+      ],
+      speakingPrompt: "Gabriela, describe how you would like your tea served when you visit Covent Garden!"
+    },
+    {
+      id: "vis_cafe",
+      title: "Cozy Soho Cafe & Coffee Culture ☕",
+      subtitle: "Ordering in Central London",
+      image: "images/soho_cafe.jpg",
+      badge: "Cafe & Dining Phrases",
+      ptTranslation: "Cafés de Soho e Expressões de Atendimento 🇵🇹",
+      description: "London cafes in Soho and Leicester Square are perfect for warming up with a hot coffee, pastry, or quick light lunch during winter sightseeing.",
+      targetVocab: [
+        { word: "Flat White", translation: "Café com leite cremoso", phonetic: "/flæt waɪt/" },
+        { word: "Eat in or take away?", translation: "Para comer aqui ou levar?", phonetic: "/iːt ɪn ɔː teɪk əˈweɪ/" },
+        { word: "The bill, please", translation: "A conta, por favor", phonetic: "/ðə bɪl pliːz/" },
+        { word: "Contactless", translation: "Pagamento por aproximação", phonetic: "/ˈkɒntæktləs/" }
+      ],
+      speakingPrompt: "Roleplay: Practice ordering your favorite hot drink and pastry with your teacher!"
+    },
+    {
+      id: "vis_tube",
+      title: "London Underground Tube & Directions 🚇",
+      subtitle: "Navigating London Trains",
+      image: "images/tube_guide.jpg",
+      badge: "Transport & Directions",
+      ptTranslation: "Metro de Londres e Direções Cardinais 🇵🇹",
+      description: "London's Tube network relies on platform direction signs (Northbound, Southbound, Eastbound, Westbound) and escalator etiquette.",
+      targetVocab: [
+        { word: "Westbound Platform", translation: "Plataforma Sentido Oeste", phonetic: "/ˈwestbaʊnd ˈplætfɔːm/" },
+        { word: "Stand on the right", translation: "Manter-se à direita na escada", phonetic: "/stænd ɒn ðə raɪt/" },
+        { word: "Mind the gap", translation: "Cuidado com o vão do comboio", phonetic: "/maɪnd ðə ɡæp/" },
+        { word: "Oyster / Contactless", translation: "Passe / Cartão bancário", phonetic: "/ˈɔɪstə/" }
+      ],
+      speakingPrompt: "Explain how to travel from Oxford Circus to Notting Hill Gate using Northbound/Westbound platform signs!"
+    },
+    {
+      id: "vis_fashion",
+      title: "Winter London Style & Weather Guide 🧥",
+      subtitle: "Dressing for Jan/Feb (3°C - 9°C)",
+      image: "images/winter_fashion.jpg",
+      badge: "Winter Travel & Shopping",
+      ptTranslation: "Guia de Estilo de Inverno e Roupa 🇵🇹",
+      description: "Staying stylish and warm while walking around Buckingham Palace and Oxford Street during chilly winter days in London.",
+      targetVocab: [
+        { word: "Layering up", translation: "Vestir-se em camadas", phonetic: "/ˈleɪərɪŋ ʌp/" },
+        { word: "Fitting room", translation: "Provador de roupa", phonetic: "/ˈfɪtɪŋ ruːm/" },
+        { word: "Drizzle", translation: "Chuvisco / Chuva leve", phonetic: "/ˈdrɪzl/" },
+        { word: "Winter Sale", translation: "Saldos de Inverno", phonetic: "/ˈwɪntə seɪl/" }
+      ],
+      speakingPrompt: "Describe the outfit you are packing in your suitcase for London in January!"
+    }
+  ],
+
+  teacherLessonPlan: {
+    lessonTitle: "Preply 1-on-1 Lesson Plan: Gabriela's London Travel English",
+    duration: "50 Minutes",
+    level: "Elementary to Pre-Intermediate (A2/B1)",
+    studentProfile: "Gabriela (Portuguese native speaker, traveling to London in Jan/Feb)",
+    lessonGoals: [
+      "Master essential London travel vocabulary (Tube, cafes, winter weather, landmarks).",
+      "Confidently order food/drinks and ask for the bill in British English.",
+      "Understand Tube cardinal directions (Northbound/Westbound) and platform signs.",
+      "Correct common Portuguese ESL errors (e.g. 'make/do', 'stand on the right', 'the bill')."
+    ],
+    timeline: [
+      {
+        time: "00:00 - 00:05 (5 mins)",
+        stage: "Warm-Up & Icebreaker",
+        activity: "Ask Gabriela about her upcoming London itinerary and winter weather expectations in January (3°C - 9°C).",
+        teacherPrompt: "'Hi Gabriela! Are you excited for London? Let me show you today's visual cards! What clothes are you packing?'"
+      },
+      {
+        time: "00:05 - 00:15 (10 mins)",
+        stage: "Visual Flashcards & Audio Drill",
+        activity: "Review the 4 Visual Learning Cards (Afternoon Tea, Soho Cafe, Tube Guide, Winter Style). Practice British pronunciation with Web Speech audio.",
+        teacherPrompt: "Ask Gabriela to repeat key words like 'Flat White', 'Mind the gap', 'Clotted cream', and 'Fitting room'."
+      },
+      {
+        time: "00:15 - 00:30 (15 mins)",
+        stage: "Interactive Cafe & Tube Roleplays",
+        activity: "Perform Roleplay #1 (Ordering at Leicester Square Grind) and Roleplay #2 (Navigating Tube to Notting Hill Gate). Swap roles!",
+        teacherPrompt: "Pay attention to polite British tags: 'Could I have... please?', 'Cheers!', and 'Just tap water, please'."
+      },
+      {
+        time: "00:30 - 00:40 (10 mins)",
+        stage: "5-Stage Vocab Grid Challenge",
+        activity: "Guide Gabriela through the interactive audio grid game in the web app to reinforce auditory recognition of London target words.",
+        teacherPrompt: "Play target audio clips and have Gabriela identify the coordinates on the 5x5 grid."
+      },
+      {
+        time: "00:40 - 00:45 (5 mins)",
+        stage: "Portuguese ESL Error Correction",
+        activity: "Review Portuguese false cognates and preposition traps for native Portuguese speakers.",
+        corrections: [
+          "❌ 'I want coffee' -> ✔️ 'Could I have a coffee, please?'",
+          "❌ 'The check' -> ✔️ 'The bill' (in UK English)",
+          "❌ 'Train to West' -> ✔️ 'Westbound platform'",
+          "❌ 'Walk on the right' -> ✔️ 'Stand on the right' (on Tube escalators)"
+        ]
+      },
+      {
+        time: "00:45 - 00:50 (5 mins)",
+        stage: "Homework Assignment & Wrap-Up",
+        activity: "Assign the Interactive Homework Module in the app. Show Gabriela how to download her .txt report and upload it on Preply chat!",
+        teacherPrompt: "'Gabriela, complete the homework exercises on the site and click 'Download Homework (.txt)' to send me your score before our next class!'"
+      }
+    ]
+  }
 };
 
 if (typeof module !== 'undefined') {

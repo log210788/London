@@ -1040,8 +1040,118 @@ Note: Completed via London Travel Homework Hub!
   }
 
   /* --------------------------------------------------------------------------
+     5. Visual Learning Cards Renderer
+     -------------------------------------------------------------------------- */
+  function renderVisualCards() {
+    const container = document.getElementById('visual-cards-container');
+    if (!container || !LONDON_VOCAB_DATA.visualCards) return;
+
+    container.innerHTML = LONDON_VOCAB_DATA.visualCards.map(card => `
+      <div class="visual-card">
+        <div class="visual-card-image-wrap">
+          <img src="${card.image}" alt="${card.title}" class="visual-card-img" />
+          <span class="visual-card-badge">${card.badge}</span>
+        </div>
+        <div class="visual-card-body">
+          <h3 class="visual-card-title">${card.title}</h3>
+          <div class="visual-card-subtitle">${card.subtitle}</div>
+          <div class="visual-card-pt">🇵🇹 ${card.ptTranslation}</div>
+          <p class="visual-card-desc">${card.description}</p>
+          
+          <div class="visual-vocab-section">
+            <h4 class="visual-section-heading">🎯 Target Words & Audio:</h4>
+            <div class="visual-vocab-chips">
+              ${card.targetVocab.map(v => `
+                <div class="vocab-chip">
+                  <button class="audio-btn-sm" title="Listen to pronunciation" onclick="window.playAudio('${v.word.replace(/'/g, "\\'")}')">🔊</button>
+                  <div class="vocab-chip-info">
+                    <strong style="color: var(--text-dark);">${v.word}</strong>
+                    <span class="phonetic" style="font-size: 0.8rem; color: var(--primary); font-family: monospace;">${v.phonetic}</span>
+                    <span class="pt" style="font-size: 0.82rem; color: var(--text-muted);">🇵🇹 ${v.translation}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          
+          <div class="visual-speaking-prompt">
+            <span style="font-size: 0.9rem; font-weight: 600; color: var(--primary);">💬 Speaking Prompt for Preply Class:</span>
+            <p style="font-size: 0.95rem; font-style: italic; color: var(--text-dark); margin-top: 4px;">"${card.speakingPrompt}"</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  /* --------------------------------------------------------------------------
+     6. Teacher Lesson Plan Renderer
+     -------------------------------------------------------------------------- */
+  function renderTeacherLessonPlan() {
+    const container = document.getElementById('teacher-plan-container');
+    if (!container || !LONDON_VOCAB_DATA.teacherLessonPlan) return;
+
+    const plan = LONDON_VOCAB_DATA.teacherLessonPlan;
+
+    container.innerHTML = `
+      <div class="teacher-plan-header">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+          <span style="background: var(--primary-light); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
+            🎓 Tutor Teaching Guide
+          </span>
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Preply 1-on-1 Lesson</span>
+        </div>
+        <h3 class="serif-font" style="font-size: 1.5rem; color: var(--text-dark); margin-bottom: 12px;">${plan.lessonTitle}</h3>
+        <div class="teacher-meta-row" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;">
+          <span class="meta-tag">⏳ <strong>Duration:</strong> ${plan.duration}</span>
+          <span class="meta-tag">📊 <strong>Level:</strong> ${plan.level}</span>
+          <span class="meta-tag">👩‍🎓 <strong>Student:</strong> ${plan.studentProfile}</span>
+        </div>
+      </div>
+
+      <div class="plan-goals-card" style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+        <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>🎯</span> Lesson Objectives & Core Goals
+        </h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+          ${plan.lessonGoals.map(g => `<li style="display: flex; gap: 8px; font-size: 0.95rem;"><span>✨</span> <span>${g}</span></li>`).join('')}
+        </ul>
+      </div>
+
+      <h4 class="serif-font" style="font-size: 1.3rem; color: var(--text-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <span>⏰</span> 50-Minute Step-by-Step Lesson Timeline
+      </h4>
+
+      <div class="timeline-stepper">
+        ${plan.timeline.map((step, idx) => `
+          <div class="timeline-step-card">
+            <div class="step-time-badge">${step.time}</div>
+            <div class="step-card-content">
+              <h4 class="step-stage-title">Stage ${idx + 1}: ${step.stage}</h4>
+              <p style="margin-bottom: 8px; font-size: 0.95rem; color: var(--text-dark);"><strong>Activity:</strong> ${step.activity}</p>
+              <div style="background: var(--primary-light); border-left: 3px solid var(--primary); padding: 10px 14px; border-radius: 6px; font-size: 0.92rem; color: var(--text-dark); margin-bottom: 8px;">
+                <strong>🗣️ Suggested Teacher Prompt:</strong><br>
+                <em>${step.teacherPrompt}</em>
+              </div>
+              ${step.corrections ? `
+                <div class="corrections-box" style="background: #fff8f8; border: 1px dashed var(--secondary); padding: 12px 16px; border-radius: 8px; margin-top: 10px;">
+                  <strong style="color: var(--error); font-size: 0.9rem;">🇵🇹 Portuguese ESL Corrections to Highlight:</strong>
+                  <ul style="list-style: none; margin-top: 6px; display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem;">
+                    ${step.corrections.map(c => `<li>${c}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  /* --------------------------------------------------------------------------
      Initialize App Component Views
      -------------------------------------------------------------------------- */
+  renderVisualCards();
+  renderTeacherLessonPlan();
   renderFlashcardFilters();
   renderFlashcards();
   renderQuizFilters();
