@@ -306,6 +306,82 @@ const LONDON_VOCAB_DATA = {
       correctAnswer: "had",
       hint: "Use past tense of 'have' for 2nd conditional (had)."
     }
+  ],
+
+  eightWeekSyllabus: [
+    {
+      week: 1,
+      title: "Hypothetical Choices ('Would You Rather...?')",
+      ptTitle: "Escolhas Hipotéticas e Justificações 🇵🇹",
+      focus: "Expressing preferences, weighing pros & cons, hesitating naturally.",
+      grammar: "Second Conditionals (If + past -> would)",
+      status: "Active Week 🌟",
+      isActive: true,
+      link: "student_homework.html"
+    },
+    {
+      week: 2,
+      title: "The Art of Storytelling & Personal Anecdotes",
+      ptTitle: "Histórias e Histórias Pessoais 🇵🇹",
+      focus: "Sharing personal stories, keeping listeners engaged, dramatic pauses.",
+      grammar: "Narrative Tenses (Past Simple, Past Continuous, Past Perfect)",
+      status: "Upcoming (Week 2)",
+      isActive: false
+    },
+    {
+      week: 3,
+      title: "Travel, Luxury Hotels & Airport Scenarios",
+      ptTitle: "Viagens, Hotéis de Luxo e Aeroportos 🇵🇹",
+      focus: "Airport scenarios, handling delays, asking for room upgrades politely.",
+      grammar: "Indirect / Polite Questions (I was wondering if...)",
+      status: "Upcoming (Week 3)",
+      isActive: false
+    },
+    {
+      week: 4,
+      title: "Gastronomy, Cafes & Social Dining",
+      ptTitle: "Gastronomia, Cafés e Jantares Sociais 🇵🇹",
+      focus: "Ordering afternoon tea, describing flavors, making food/wine recommendations.",
+      grammar: "Sensory Adjectives (crisp, subtle, rich, savory)",
+      status: "Upcoming (Week 4)",
+      isActive: false
+    },
+    {
+      week: 5,
+      title: "Pop Culture, Movies & Binge-Worthy Series",
+      ptTitle: "Cultura Pop, Filmes e Séries 🇵🇹",
+      focus: "Reviewing shows, debating character choices, recommending books/movies.",
+      grammar: "Relative Clauses & Expressive Adjectives",
+      status: "Upcoming (Week 5)",
+      isActive: false
+    },
+    {
+      week: 6,
+      title: "Fashion, Personal Style & Boutique Shopping",
+      ptTitle: "Moda, Estilo Pessoal e Compras 🇵🇹",
+      focus: "Describing outfits, fit, textures, asking for fitting rooms & returns.",
+      grammar: "Comparative & Superlative Modifiers",
+      status: "Upcoming (Week 6)",
+      isActive: false
+    },
+    {
+      week: 7,
+      title: "Modern Debates: Work-Life Balance & Technology",
+      ptTitle: "Debates Modernos e Tecnologia 🇵🇹",
+      focus: "Expressing strong vs. soft opinions, disagreeing politely without conflict.",
+      grammar: "Modal Verbs of Probability & Softening",
+      status: "Upcoming (Week 7)",
+      isActive: false
+    },
+    {
+      week: 8,
+      title: "Future Dreams, Bucket Lists & Graduation",
+      ptTitle: "Sonhos Futuros e Celebração Final 🇵🇹",
+      focus: "Pitching travel bucket-list destinations, future goals, course recap.",
+      grammar: "Future Perfect & Future Continuous",
+      status: "Upcoming (Week 8)",
+      isActive: false
+    }
   ]
 };
 

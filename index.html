@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gabriela's "Would You Rather...?" Preply Hub 🌸</title>
-  <meta name="description" content="Personalized Preply ESL speaking practice and homework hub for Gabriela: 'Would You Rather...?' hypothetical choices, second conditionals, and functional language.">
+  <title>Gabriela's Preply English Learning Hub 🌸</title>
+  <meta name="description" content="Central Preply ESL landing page and 8-week curriculum roadmap for Gabriela: Conversational English, Would You Rather, travel practice, and homework exporter.">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,26 +21,36 @@
     <!-- Hero Header Banner -->
     <header class="hero-header">
       <div class="hero-badge">
-        <span>🌸 Preply ESL Speaking Hub</span>
+        <span>🌸 Preply Conversational English Hub</span>
+        <span>•</span>
+        <span>8-Week Fluency Roadmap</span>
         <span>•</span>
         <span>Target: B1/B2 Intermediate</span>
-        <span>•</span>
-        <span>🇵🇹 Portuguese Support</span>
       </div>
 
       <h1 class="hero-title">Welcome, Gabriela! ✨</h1>
       <p class="hero-subtitle">
-        Your interactive home for "Would You Rather...?" conversational speaking, expressing choices, weighing pros & cons, second conditionals, and Preply homework!
+        Your interactive home for 1-on-1 Preply English lessons, 8-week fluency goals, visual conversation cards, second conditionals, and homework exercises!
       </p>
+
+      <!-- Quick Action Buttons -->
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 18px 0;">
+        <a href="student_homework.html" class="btn-primary" style="text-decoration: none; font-weight: 700; font-size: 1rem; padding: 12px 24px;">
+          <span>🚀</span> Open Gabriela's Student Homework Portal
+        </a>
+        <a href="#active-homework-section" class="btn-secondary" style="text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 12px 20px;">
+          <span>✏️</span> Jump to Current Homework (Week 1)
+        </a>
+      </div>
       
       <div class="hero-stats-row">
         <div class="stat-pill">
-          <span>💬 Topic:</span>
-          <strong>Would You Rather...?</strong>
+          <span>📅 Active Lesson:</span>
+          <strong>Week 1 of 8</strong>
         </div>
         <div class="stat-pill">
-          <span>📊 Level:</span>
-          <strong>Intermediate (B1/B2)</strong>
+          <span>💬 Topic:</span>
+          <strong>Would You Rather...?</strong>
         </div>
         <div class="stat-pill">
           <span>⭐ Homework Score:</span>
@@ -53,210 +63,241 @@
       </div>
     </header>
 
-    <!-- Navigation Tabs -->
-    <nav class="nav-tabs" id="main-nav-tabs" role="tablist">
-      <button class="tab-btn active" data-tab="visuals" role="tab">
-        <span>🌸</span> Visual Dilemmas
-      </button>
-      <button class="tab-btn" data-tab="teacherplan" role="tab">
-        <span>🍎</span> Teacher Lesson Plan
-      </button>
-      <button class="tab-btn" data-tab="phrases" role="tab">
-        <span>💬</span> Functional Language
-      </button>
-      <button class="tab-btn" data-tab="cards" role="tab">
-        <span>🎴</span> Conversation Cards
-      </button>
-      <button class="tab-btn" data-tab="quizzes" role="tab">
-        <span>✏️</span> Preply Homework
-      </button>
-      <button class="tab-btn" data-tab="progress" role="tab">
-        <span>📊</span> My Progress
-      </button>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main>
-
-      <!-- TAB 1: VISUAL DILEMMA CARDS FOR GABRIELA -->
-      <section id="tab-visuals" class="tab-content active" role="tabpanel">
-        <div class="card-section">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title"><span>🌸</span> Visual Dilemma Cards for Gabriela</h2>
-              <p class="section-desc">Interactive visual cards with high-definition dilemma scenes, target phrases, native British audio, and 3-step discussion flows for class!</p>
-            </div>
-          </div>
-
-          <div class="visual-cards-grid" id="visual-cards-container">
-            <!-- Rendered dynamically by JS -->
-          </div>
+    <!-- SECTION 1: 8-WEEK CURRICULUM ROADMAP -->
+    <section class="card-section" style="margin-bottom: 32px;">
+      <div class="section-header">
+        <div>
+          <span style="background: var(--primary-light); color: var(--primary); padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">
+            🗺️ Course Syllabus
+          </span>
+          <h2 class="section-title" style="margin-top: 6px;"><span>🗓️</span> Gabriela's 8-Week Conversational English Roadmap</h2>
+          <p class="section-desc">Here is your 8-week learning plan for your Preply lessons! Click on Week 1 to access your active homework.</p>
         </div>
-      </section>
+      </div>
 
-      <!-- TAB 2: TEACHER LESSON PLAN -->
-      <section id="tab-teacherplan" class="tab-content" role="tabpanel">
-        <div class="card-section">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title"><span>🍎</span> Preply 50–60 Minute Lesson Plan & Notes</h2>
-              <p class="section-desc">Structured teaching guide for Gabriela's tutor: Warm-up questions, target functional structures, 3-step discussion flow, feedback guidance, and adult learner tips.</p>
-            </div>
-          </div>
+      <!-- 8-Week Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;" id="syllabus-roadmap-container">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
 
-          <div class="teacher-plan-container" id="teacher-plan-container">
-            <!-- Rendered dynamically by JS -->
-          </div>
+    <!-- SECTION 2: ACTIVE HOMEWORK WORKSPACE (WEEK 1) -->
+    <div id="active-homework-section">
+      <div class="section-header" style="margin-bottom: 16px;">
+        <div>
+          <span style="background: #e8f5e9; color: var(--success); padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">
+            🌟 Active Homework • Week 1
+          </span>
+          <h2 class="section-title" style="margin-top: 6px;"><span>✏️</span> Week 1: "Would You Rather...?" Homework & Practice</h2>
+          <p class="section-desc">Complete these exercises, practice natural phrase pronunciation, and download your homework report to send to your teacher on Preply!</p>
         </div>
-      </section>
+      </div>
 
-      <!-- TAB 3: FUNCTIONAL LANGUAGE BANK -->
-      <section id="tab-phrases" class="tab-content" role="tabpanel">
-        <div class="card-section">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title"><span>💬</span> Functional Language & Phrase Bank</h2>
-              <p class="section-desc">Master natural phrases for expressing choices, weighing pros & cons, and hesitating politely. Click the speaker icon to listen to British audio pronunciation!</p>
-            </div>
-          </div>
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" id="main-nav-tabs" role="tablist">
+        <button class="tab-btn active" data-tab="visuals" role="tab">
+          <span>🌸</span> Visual Dilemmas
+        </button>
+        <button class="tab-btn" data-tab="phrases" role="tab">
+          <span>💬</span> Phrase Bank
+        </button>
+        <button class="tab-btn" data-tab="cards" role="tab">
+          <span>🎴</span> Conversation Cards
+        </button>
+        <button class="tab-btn" data-tab="quizzes" role="tab">
+          <span>✏️</span> Preply Homework
+        </button>
+        <button class="tab-btn" data-tab="progress" role="tab">
+          <span>📊</span> My Progress
+        </button>
+        <button class="tab-btn" data-tab="teacherplan" role="tab" style="margin-left: auto; background: rgba(200, 107, 123, 0.08);">
+          <span>🍎</span> Tutor Notes
+        </button>
+      </nav>
 
-          <div class="phrases-container" id="functional-phrases-container">
-            <!-- Rendered dynamically by JS -->
-          </div>
-        </div>
-      </section>
+      <!-- Main Content Area -->
+      <main>
 
-      <!-- TAB 4: CONVERSATION CARDS -->
-      <section id="tab-cards" class="tab-content" role="tabpanel">
-        <div class="card-section">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title"><span>🎴</span> "Would You Rather...?" Conversation Cards</h2>
-              <p class="section-desc">10 interactive dilemma cards across Lifestyle, Travel, Superpowers, and Food. Click your preferred option to practice justifying your choice!</p>
-            </div>
-          </div>
-
-          <!-- Category Filter -->
-          <div class="category-filter" id="card-category-filter">
-            <!-- Rendered by JS -->
-          </div>
-
-          <div class="cards-grid" id="conversation-cards-container">
-            <!-- Rendered dynamically by JS -->
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 5: PREPLY HOMEWORK QUIZZES -->
-      <section id="tab-quizzes" class="tab-content" role="tabpanel">
-        <div class="card-section">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title"><span>✏️</span> Preply Homework & Second Conditional Exercises</h2>
-              <p class="section-desc">Complete these exercises to practice second conditionals ("If I had to choose... I would pick...") and functional phrases. Your score saves automatically!</p>
-            </div>
-          </div>
-
-          <div class="quiz-container" id="quiz-questions-container">
-            <!-- Quiz cards rendered by JS -->
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 6: MY PROGRESS & PREPLY EXPORTER -->
-      <section id="tab-progress" class="tab-content" role="tabpanel">
-        <div class="card-section">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title"><span>📊</span> Gabriela's Homework Progress & Preply Exporter</h2>
-              <p class="section-desc">Review your score, download your homework report, and upload it directly to your tutor on Preply!</p>
-            </div>
-          </div>
-
-          <div class="progress-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 600;">
-              <span>Overall Homework Completion</span>
-              <span id="progress-percent-label">0%</span>
-            </div>
-            
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" id="progress-bar-fill"></div>
-            </div>
-
-            <h3 class="serif-font" style="margin-bottom: 12px; color: var(--primary);">📋 Preply Homework Summary Report</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
-              You can copy your report or download it as a document file to send to your teacher on Preply!
-            </p>
-
-            <div class="homework-summary-box" id="summary-report-text">
-              Generating your report...
-            </div>
-
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px;">
-              <button class="btn-primary" id="btn-download-report">
-                <span>📥</span> Download Homework (.txt)
-              </button>
-              <button class="btn-secondary" id="btn-copy-report">
-                <span>📋</span> Copy Text Report
-              </button>
-              <button class="btn-secondary" id="btn-reset-progress" style="margin-left: auto;">
-                <span>🔄</span> Reset Progress
-              </button>
-            </div>
-
-            <!-- Preply Upload Guide Callout -->
-            <div class="preply-guide-card">
-              <div class="preply-guide-header">
-                <span class="preply-logo-badge">Preply 🎓</span>
-                <h3 class="serif-font" style="font-size: 1.25rem; color: var(--text-dark); margin: 0;">
-                  How to Send Your Homework to Your Teacher on Preply
-                </h3>
+        <!-- TAB 1: VISUAL DILEMMA CARDS FOR GABRIELA -->
+        <section id="tab-visuals" class="tab-content active" role="tabpanel">
+          <div class="card-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title"><span>🌸</span> Visual Dilemma Cards</h2>
+                <p class="section-desc">Interactive visual cards with high-definition dilemma scenes, target phrases, native British audio, and 3-step discussion flows for class!</p>
               </div>
-              <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
-                Follow these simple steps:
+            </div>
+
+            <div class="visual-cards-grid" id="visual-cards-container">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: FUNCTIONAL LANGUAGE BANK -->
+        <section id="tab-phrases" class="tab-content" role="tabpanel">
+          <div class="card-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title"><span>💬</span> Functional Language & Phrase Bank</h2>
+                <p class="section-desc">Master natural phrases for expressing choices, weighing pros & cons, and hesitating politely. Click the speaker icon to listen to British audio pronunciation!</p>
+              </div>
+            </div>
+
+            <div class="phrases-container" id="functional-phrases-container">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: CONVERSATION CARDS -->
+        <section id="tab-cards" class="tab-content" role="tabpanel">
+          <div class="card-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title"><span>🎴</span> "Would You Rather...?" Conversation Cards</h2>
+                <p class="section-desc">10 interactive dilemma cards across Lifestyle, Travel, Superpowers, and Food. Click your preferred option to practice justifying your choice!</p>
+              </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="category-filter" id="card-category-filter">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div class="cards-grid" id="conversation-cards-container">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: PREPLY HOMEWORK QUIZZES -->
+        <section id="tab-quizzes" class="tab-content" role="tabpanel">
+          <div class="card-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title"><span>✏️</span> Preply Homework & Second Conditional Exercises</h2>
+                <p class="section-desc">Complete these exercises to practice second conditionals ("If I had to choose... I would pick...") and functional phrases. Your score saves automatically!</p>
+              </div>
+            </div>
+
+            <div class="quiz-container" id="quiz-questions-container">
+              <!-- Quiz cards rendered by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 5: MY PROGRESS & PREPLY EXPORTER -->
+        <section id="tab-progress" class="tab-content" role="tabpanel">
+          <div class="card-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title"><span>📊</span> Gabriela's Homework Progress & Preply Exporter</h2>
+                <p class="section-desc">Review your score, download your homework report, and upload it directly to your tutor on Preply!</p>
+              </div>
+            </div>
+
+            <div class="progress-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 600;">
+                <span>Overall Homework Completion</span>
+                <span id="progress-percent-label">0%</span>
+              </div>
+              
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+              </div>
+
+              <h3 class="serif-font" style="margin-bottom: 12px; color: var(--primary);">📋 Preply Homework Summary Report</h3>
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+                You can copy your report or download it as a document file to send to your teacher on Preply!
               </p>
 
-              <div class="preply-steps-grid">
-                <div class="preply-step-item">
-                  <div class="step-num">Step 1</div>
-                  <div class="step-icon">📥</div>
-                  <div class="step-title">Download File</div>
-                  <div class="step-desc">Click the pink <strong>"Download Homework (.txt)"</strong> button above to save your homework report onto your phone or computer.</div>
-                </div>
+              <div class="homework-summary-box" id="summary-report-text">
+                Generating your report...
+              </div>
 
-                <div class="preply-step-item">
-                  <div class="step-num">Step 2</div>
-                  <div class="step-icon">💬</div>
-                  <div class="step-title">Open Preply Chat</div>
-                  <div class="step-desc">Log into <strong>Preply</strong> app or website and open the chat message window with your English teacher.</div>
-                </div>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px;">
+                <button class="btn-primary" id="btn-download-report">
+                  <span>📥</span> Download Homework (.txt)
+                </button>
+                <button class="btn-secondary" id="btn-copy-report">
+                  <span>📋</span> Copy Text Report
+                </button>
+                <button class="btn-secondary" id="btn-reset-progress" style="margin-left: auto;">
+                  <span>🔄</span> Reset Progress
+                </button>
+              </div>
 
-                <div class="preply-step-item">
-                  <div class="step-num">Step 3</div>
-                  <div class="step-icon">📎</div>
-                  <div class="step-title">Attach Document</div>
-                  <div class="step-desc">Click the paperclip or plus icon <strong>(📎)</strong> next to the message box and select your downloaded file (<code>Gabriela_WouldYouRather_Homework.txt</code>).</div>
+              <!-- Preply Upload Guide Callout -->
+              <div class="preply-guide-card">
+                <div class="preply-guide-header">
+                  <span class="preply-logo-badge">Preply 🎓</span>
+                  <h3 class="serif-font" style="font-size: 1.25rem; color: var(--text-dark); margin: 0;">
+                    How to Send Your Homework to Your Teacher on Preply
+                  </h3>
                 </div>
+                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 16px;">
+                  Follow these simple steps:
+                </p>
 
-                <div class="preply-step-item">
-                  <div class="step-num">Step 4</div>
-                  <div class="step-icon">🚀</div>
-                  <div class="step-title">Send & Celebrate!</div>
-                  <div class="step-desc">Press <strong>Send</strong>! Your teacher will receive your full score breakdown and quiz answers.</div>
+                <div class="preply-steps-grid">
+                  <div class="preply-step-item">
+                    <div class="step-num">Step 1</div>
+                    <div class="step-icon">📥</div>
+                    <div class="step-title">Download File</div>
+                    <div class="step-desc">Click the pink <strong>"Download Homework (.txt)"</strong> button above to save your homework report onto your phone or computer.</div>
+                  </div>
+
+                  <div class="preply-step-item">
+                    <div class="step-num">Step 2</div>
+                    <div class="step-icon">💬</div>
+                    <div class="step-title">Open Preply Chat</div>
+                    <div class="step-desc">Log into <strong>Preply</strong> app or website and open the chat message window with your English teacher.</div>
+                  </div>
+
+                  <div class="preply-step-item">
+                    <div class="step-num">Step 3</div>
+                    <div class="step-icon">📎</div>
+                    <div class="step-title">Attach Document</div>
+                    <div class="step-desc">Click the paperclip or plus icon <strong>(📎)</strong> next to the message box and select your downloaded file (<code>Gabriela_WouldYouRather_Homework.txt</code>).</div>
+                  </div>
+
+                  <div class="preply-step-item">
+                    <div class="step-num">Step 4</div>
+                    <div class="step-icon">🚀</div>
+                    <div class="step-title">Send & Celebrate!</div>
+                    <div class="step-desc">Press <strong>Send</strong>! Your teacher will receive your full score breakdown and quiz answers.</div>
+                  </div>
                 </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 6: TEACHER LESSON PLAN (For Tutor) -->
+        <section id="tab-teacherplan" class="tab-content" role="tabpanel">
+          <div class="card-section">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title"><span>🍎</span> Preply 50–60 Minute Lesson Plan & Notes</h2>
+                <p class="section-desc">Structured teaching guide for Gabriela's tutor: Warm-up questions, target functional structures, 3-step discussion flow, feedback guidance, and adult learner tips.</p>
               </div>
             </div>
 
+            <div class="teacher-plan-container" id="teacher-plan-container">
+              <!-- Rendered dynamically by JS -->
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-    </main>
+      </main>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
       <p>Made with ❤️ for <strong>Gabriela's Preply Lessons</strong> • ESL Speaking Companion</p>
-      <p style="margin-top: 4px; opacity: 0.8;">Hosted on GitHub Pages • <a href="https://github.com/log210788/London" target="_blank">github.com/log210788/London</a></p>
+      <p style="margin-top: 4px; opacity: 0.8;">Hosted on GitHub Pages • <a href="student_homework.html">Student Homework Portal</a></p>
     </footer>
 
   </div>

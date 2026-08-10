@@ -519,8 +519,40 @@ Note: Completed via Gabriela's Preply Speaking Hub!
   }
 
   /* --------------------------------------------------------------------------
+     9. 8-Week Syllabus Roadmap Renderer
+     -------------------------------------------------------------------------- */
+  function render8WeekSyllabus() {
+    const container = document.getElementById('syllabus-roadmap-container');
+    if (!container || !LONDON_VOCAB_DATA.eightWeekSyllabus) return;
+
+    container.innerHTML = LONDON_VOCAB_DATA.eightWeekSyllabus.map(item => `
+      <div class="syllabus-card ${item.isActive ? 'active-week' : ''}" style="background: ${item.isActive ? 'linear-gradient(135deg, #fffafc 0%, #fff0f3 100%)' : 'var(--surface)'}; border: 2px solid ${item.isActive ? 'var(--primary)' : 'var(--border-color)'}; border-radius: var(--radius-md); padding: 18px; box-shadow: ${item.isActive ? 'var(--shadow-md)' : 'var(--shadow-sm)'}; position: relative; transition: var(--transition);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 0.8rem; font-weight: 700; background: ${item.isActive ? 'var(--primary)' : 'var(--primary-light)'}; color: ${item.isActive ? '#fff' : 'var(--primary)'}; padding: 3px 12px; border-radius: 12px;">
+            Week ${item.week} • ${item.status}
+          </span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">${item.ptTitle}</span>
+        </div>
+
+        <h3 class="serif-font" style="font-size: 1.15rem; color: var(--text-dark); margin-bottom: 8px;">${item.title}</h3>
+        <p style="font-size: 0.88rem; color: var(--text-dark); margin-bottom: 6px;"><strong>🗣️ Focus:</strong> ${item.focus}</p>
+        <p style="font-size: 0.85rem; color: var(--primary); margin-bottom: 14px;"><strong>📚 Grammar:</strong> ${item.grammar}</p>
+
+        ${item.isActive ? `
+          <a href="${item.link || 'student_homework.html'}" class="btn-primary-sm" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 700;">
+            <span>🚀</span> Open Week 1 Homework & Practice
+          </a>
+        ` : `
+          <span style="font-size: 0.82rem; color: var(--text-light); font-style: italic;">Locked (Unlocks Week ${item.week})</span>
+        `}
+      </div>
+    `).join('');
+  }
+
+  /* --------------------------------------------------------------------------
      Initialize App Component Views
      -------------------------------------------------------------------------- */
+  render8WeekSyllabus();
   renderVisualCards();
   renderTeacherLessonPlan();
   renderFunctionalPhrases();
