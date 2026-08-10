@@ -1,18 +1,14 @@
 /* ==========================================================================
-   Gabriela's London ESL Homework Hub - Interactive App Logic
+   Gabriela's "Would You Rather...?" Preply Hub - Interactive App Logic
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // State initialization with localStorage recovery
-  const STORAGE_KEY = 'gabriela_london_esl_progress';
+  const STORAGE_KEY = 'gabriela_would_you_rather_progress';
   
   let state = {
     completedQuizzes: {}, // { quizId: { correct: boolean, answer: string, score: number } }
-    activeFlashcardCat: 'all',
-    activeQuizCat: 'all',
-    activeRoleplayId: 'rp_cafe',
-    roleplayProgress: {}, // { roleplayId: currentStepIndex }
-    gridScore: 0
+    selectedCardOptions: {}, // { cardId: optionIndex }
+    activeCardCat: 'all'
   };
 
   // Load saved state
@@ -21,8 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (saved) {
       const parsed = JSON.parse(saved);
       state.completedQuizzes = parsed.completedQuizzes || {};
-      state.roleplayProgress = parsed.roleplayProgress || {};
-      state.gridScore = parsed.gridScore || 0;
+      state.selectedCardOptions = parsed.selectedCardOptions || {};
     }
   } catch (e) {
     console.error('Could not load local progress', e);
@@ -32,8 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         completedQuizzes: state.completedQuizzes,
-        roleplayProgress: state.roleplayProgress,
-        gridScore: state.gridScore || 0
+        selectedCardOptions: state.selectedCardOptions
       }));
     } catch (e) {
       console.error('Could not save progress', e);
@@ -49,10 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof onEndCallback === 'function') onEndCallback();
       return;
     }
-    window.speechSynthesis.cancel(); // Stop ongoing speech
+    window.speechSynthesis.cancel();
     
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.88; // Slightly relaxed pace for ESL learners
+    utterance.rate = 0.88;
     utterance.pitch = 1.0;
 
     let hasEnded = false;
@@ -66,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     utterance.onend = safeEnd;
     utterance.onerror = safeEnd;
 
-    // Search for British English voice
     const voices = window.speechSynthesis.getVoices();
     const ukVoice = voices.find(v => v.lang.includes('en-GB') || v.name.includes('UK') || v.name.includes('British'));
     if (ukVoice) {
@@ -77,13 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.speechSynthesis.speak(utterance);
 
-    // Fallback safety timeout if browser fails to trigger onend
     if (typeof onEndCallback === 'function') {
       const estimatedDurationMs = Math.max(2500, text.length * 110);
       setTimeout(safeEnd, estimatedDurationMs + 1000);
     }
   }
 
+  window.playAudio = (text) => {
+    speakWord(text);
+  };
 
   // Pre-load voices
   if ('speechSynthesis' in window) {
@@ -114,933 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* --------------------------------------------------------------------------
-     3. Flashcards Engine
-     -------------------------------------------------------------------------- */
-  const flashcardFilterEl = document.getElementById('flashcard-category-filter');
-  const flashcardsContainerEl = document.getElementById('flashcards-container');
-
-  function renderFlashcardFilters() {
-    let html = `
-      <button class="filter-btn ${state.activeFlashcardCat === 'all' ? 'active' : ''}" data-cat="all">
-        ✨ All Topics
-      </button>
-    `;
-
-    LONDON_VOCAB_DATA.categories.forEach(cat => {
-      html += `
-        <button class="filter-btn ${state.activeFlashcardCat === cat.id ? 'active' : ''}" data-cat="${cat.id}">
-          ${cat.icon} ${cat.title}
-        </button>
-      `;
-    });
-
-    flashcardFilterEl.innerHTML = html;
-
-    flashcardFilterEl.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        state.activeFlashcardCat = btn.getAttribute('data-cat');
-        renderFlashcardFilters();
-        renderFlashcards();
-      });
-    });
-  }
-
-  function renderFlashcards() {
-    let wordsToRender = [];
-
-    LONDON_VOCAB_DATA.categories.forEach(cat => {
-      if (state.activeFlashcardCat === 'all' || state.activeFlashcardCat === cat.id) {
-        cat.words.forEach(w => {
-          wordsToRender.push({ ...w, categoryTitle: cat.title, categoryIcon: cat.icon });
-        });
-      }
-    });
-
-    if (wordsToRender.length === 0) {
-      flashcardsContainerEl.innerHTML = `<p class="section-desc">No words found in this topic.</p>`;
-      return;
-    }
-
-    flashcardsContainerEl.innerHTML = wordsToRender.map(w => `
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-front">
-            <div class="card-top">
-              <span class="pos-tag">${w.pos}</span>
-              <button class="audio-btn" title="Listen to British pronunciation" onclick="event.stopPropagation(); window.playAudio('${w.word.replace(/'/g, "\\'")}')">
-                🔊
-              </button>
-            </div>
-            <div class="card-body">
-              <div class="card-word">${w.word}</div>
-              <div class="card-phonetic">${w.phonetic}</div>
-              ${w.ptTranslation ? `<div class="card-pt-translation">🇵🇹 ${w.ptTranslation}</div>` : ''}
-            </div>
-            <div class="card-hint-text">
-              <span>💡 Tap card to view details</span>
-            </div>
-          </div>
-          
-          <div class="flashcard-back">
-            <div class="card-top">
-              <span class="pos-tag">${w.categoryIcon} ${w.categoryTitle}</span>
-              <button class="audio-btn" title="Listen to example" onclick="event.stopPropagation(); window.playAudio('${w.example.replace(/'/g, "\\'")}')">
-                🔊
-              </button>
-            </div>
-            <div class="card-body">
-              <p class="card-definition">${w.definition}</p>
-              <p class="card-example">"${w.example}"</p>
-            </div>
-            <div class="card-tip">
-              🇵🇹 <strong>Tradução:</strong> ${w.ptTranslation}<br>
-              💡 <strong>Tip:</strong> ${w.tip}
-            </div>
-          </div>
-        </div>
-      </div>
-    `).join('');
-  }
-
-
-  window.playAudio = (text) => {
-    speakWord(text);
-  };
-
-  /* --------------------------------------------------------------------------
-     4. Homework Quizzes Engine
-     -------------------------------------------------------------------------- */
-  const quizFilterEl = document.getElementById('quiz-category-filter');
-  const quizContainerEl = document.getElementById('quiz-questions-container');
-
-  function renderQuizFilters() {
-    let html = `
-      <button class="filter-btn ${state.activeQuizCat === 'all' ? 'active' : ''}" data-cat="all">
-        ✨ All Quizzes
-      </button>
-    `;
-
-    LONDON_VOCAB_DATA.categories.forEach(cat => {
-      html += `
-        <button class="filter-btn ${state.activeQuizCat === cat.id ? 'active' : ''}" data-cat="${cat.id}">
-          ${cat.icon} ${cat.title}
-        </button>
-      `;
-    });
-
-    quizFilterEl.innerHTML = html;
-
-    quizFilterEl.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        state.activeQuizCat = btn.getAttribute('data-cat');
-        renderQuizFilters();
-        renderQuizzes();
-      });
-    });
-  }
-
-  function renderQuizzes() {
-    let quizList = [];
-
-    LONDON_VOCAB_DATA.categories.forEach(cat => {
-      if (state.activeQuizCat === 'all' || state.activeQuizCat === cat.id) {
-        cat.quizzes.forEach(q => {
-          quizList.push({ ...q, catTitle: cat.title, catIcon: cat.icon });
-        });
-      }
-    });
-
-    if (quizList.length === 0) {
-      quizContainerEl.innerHTML = `<p class="section-desc">No quizzes in this category.</p>`;
-      return;
-    }
-
-    quizContainerEl.innerHTML = quizList.map((q, idx) => {
-      const isCompleted = state.completedQuizzes[q.id];
-      
-      if (q.type === 'mcq') {
-        return `
-          <div class="quiz-card" id="quiz-card-${q.id}">
-            <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 6px;">
-              ${q.catIcon} ${q.catTitle} • Question ${idx + 1}
-            </div>
-            <div class="quiz-question">${q.question}</div>
-            <div class="quiz-options">
-              ${q.options.map((opt, optIdx) => {
-                let statusClass = '';
-                if (isCompleted) {
-                  if (optIdx === q.correct) statusClass = 'selected-correct';
-                  else if (isCompleted.userAnswerIndex === optIdx) statusClass = 'selected-incorrect';
-                }
-                return `
-                  <button class="option-btn ${statusClass}" 
-                          ${isCompleted ? 'disabled' : ''} 
-                          onclick="window.handleMCQSubmit('${q.id}', ${optIdx}, ${q.correct})">
-                    <span>${String.fromCharCode(65 + optIdx)}. ${opt}</span>
-                    ${isCompleted && optIdx === q.correct ? '<span>✓ Correct</span>' : ''}
-                  </button>
-                `;
-              }).join('')}
-            </div>
-            
-            <div class="feedback-msg ${isCompleted ? (isCompleted.correct ? 'show-success' : 'show-error') : ''}" id="feedback-${q.id}">
-              ${isCompleted ? (isCompleted.correct ? `🎉 Excellent, Gabriela! ${q.explanation}` : `Not quite! The correct answer is: "${q.options[q.correct]}".`) : ''}
-            </div>
-          </div>
-        `;
-      } else if (q.type === 'fill_blank') {
-        const userSavedText = isCompleted ? isCompleted.userText : '';
-        return `
-          <div class="quiz-card" id="quiz-card-${q.id}">
-            <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 6px;">
-              ${q.catIcon} ${q.catTitle} • Question ${idx + 1} (Fill in the Blank)
-            </div>
-            <div class="quiz-question">${q.sentence.replace('_____', '<span style="color: var(--primary); text-decoration: underline;">_______</span>')}</div>
-            <div class="fill-blank-box">
-              <input type="text" id="blank-input-${q.id}" class="blank-input" placeholder="Type answer here..." value="${userSavedText}" ${isCompleted ? 'disabled' : ''}>
-              <button class="btn-primary" ${isCompleted ? 'disabled' : ''} onclick="window.handleFillBlankSubmit('${q.id}', '${q.correctAnswer}')">
-                Check Answer ✨
-              </button>
-            </div>
-            
-            <div class="feedback-msg ${isCompleted ? (isCompleted.correct ? 'show-success' : 'show-error') : ''}" id="feedback-${q.id}">
-              ${isCompleted ? (isCompleted.correct ? `🎉 Perfect spelling, Gabriela!` : `Not quite! The correct word is: "${q.correctAnswer}".`) : `💡 Hint: ${q.hint}`}
-            </div>
-          </div>
-        `;
-      }
-      return '';
-    }).join('');
-  }
-
-  window.handleMCQSubmit = (quizId, optIdx, correctIdx) => {
-    const isCorrect = (optIdx === correctIdx);
-    state.completedQuizzes[quizId] = {
-      correct: isCorrect,
-      userAnswerIndex: optIdx,
-      score: isCorrect ? 10 : 0
-    };
-    saveState();
-    renderQuizzes();
-    if (isCorrect) speakWord('Great job, Gabriela!');
-  };
-
-  window.handleFillBlankSubmit = (quizId, correctAnswer) => {
-    const inputEl = document.getElementById(`blank-input-${quizId}`);
-    if (!inputEl) return;
-    const userVal = inputEl.value.trim();
-    if (!userVal) return;
-
-    const isCorrect = userVal.toLowerCase() === correctAnswer.toLowerCase();
-    state.completedQuizzes[quizId] = {
-      correct: isCorrect,
-      userText: userVal,
-      score: isCorrect ? 10 : 0
-    };
-    saveState();
-    renderQuizzes();
-    if (isCorrect) speakWord('Spot on!');
-  };
-
-  /* --------------------------------------------------------------------------
-     5. Roleplay Simulator Engine
-     -------------------------------------------------------------------------- */
-  const roleplaySelectorEl = document.getElementById('roleplay-selector');
-  const roleplayContainerEl = document.getElementById('active-roleplay-container');
-
-  function renderRoleplaySelectors() {
-    let html = '';
-    LONDON_VOCAB_DATA.roleplays.forEach(rp => {
-      html += `
-        <button class="filter-btn ${state.activeRoleplayId === rp.id ? 'active' : ''}" data-rpid="${rp.id}">
-          ${rp.title}
-        </button>
-      `;
-    });
-    roleplaySelectorEl.innerHTML = html;
-
-    roleplaySelectorEl.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        state.activeRoleplayId = btn.getAttribute('data-rpid');
-        renderRoleplaySelectors();
-        renderRoleplayStep();
-      });
-    });
-  }
-
-  function renderRoleplayStep() {
-    const rp = LONDON_VOCAB_DATA.roleplays.find(r => r.id === state.activeRoleplayId);
-    if (!rp) return;
-
-    const currentStepIdx = state.roleplayProgress[rp.id] || 0;
-
-    if (currentStepIdx >= rp.steps.length) {
-      // Completed roleplay
-      roleplayContainerEl.innerHTML = `
-        <div class="roleplay-card" style="text-align: center;">
-          <h3 class="serif-font" style="font-size: 1.8rem; color: var(--primary); margin-bottom: 12px;">
-            🎉 Roleplay Complete!
-          </h3>
-          <p class="section-desc" style="margin-bottom: 20px;">
-            Wonderful job, Gabriela! You completed "${rp.title}". You are ready for London!
-          </p>
-          <button class="btn-primary" onclick="window.restartRoleplay('${rp.id}')">
-            🔄 Practice Again
-          </button>
-        </div>
-      `;
-      return;
-    }
-
-    const step = rp.steps[currentStepIdx];
-
-    roleplayContainerEl.innerHTML = `
-      <div class="roleplay-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h3 class="serif-font" style="font-size: 1.3rem; color: var(--primary);">${rp.title}</h3>
-          <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Step ${currentStepIdx + 1} of ${rp.steps.length}</span>
-        </div>
-
-        <!-- Speaker Line -->
-        <div class="dialogue-box">
-          <div class="dialogue-speaker">
-            <span>🗣️ ${step.speaker}</span>
-            <button class="audio-btn" style="float: right; margin-top: -6px;" onclick="window.playAudio('${step.line.replace(/'/g, "\\'")}')">🔊</button>
-          </div>
-          <div class="dialogue-text">"${step.line}"</div>
-        </div>
-
-        <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 12px;">
-          ✨ How should Gabriela respond?
-        </p>
-
-        <div class="quiz-options">
-          ${step.options.map((opt, optIdx) => `
-            <button class="option-btn" onclick="window.handleRoleplayChoice('${rp.id}', ${optIdx})">
-              <span>💬 "${opt.text}"</span>
-            </button>
-          `).join('')}
-        </div>
-
-        <div id="roleplay-feedback" class="feedback-msg" style="margin-top: 16px;"></div>
-      </div>
-    `;
-
-    // Speak the speaker line automatically
-    speakWord(step.line);
-  }
-
-  window.handleRoleplayChoice = (rpId, choiceIdx) => {
-    const rp = LONDON_VOCAB_DATA.roleplays.find(r => r.id === rpId);
-    const currentStepIdx = state.roleplayProgress[rpId] || 0;
-    const step = rp.steps[currentStepIdx];
-    const choice = step.options[choiceIdx];
-
-    const feedbackEl = document.getElementById('roleplay-feedback');
-    if (choice.correct) {
-      feedbackEl.className = 'feedback-msg show-success';
-      feedbackEl.innerHTML = `🎉 ${choice.feedback}`;
-      
-      // Speak full response and wait for audio to finish before advancing
-      speakWord(choice.text, () => {
-        setTimeout(() => {
-          state.roleplayProgress[rpId] = currentStepIdx + 1;
-          saveState();
-          renderRoleplayStep();
-        }, 600);
-      });
-    } else {
-      feedbackEl.className = 'feedback-msg show-error';
-      feedbackEl.innerHTML = `💡 ${choice.feedback}`;
-    }
-  };
-
-
-  window.restartRoleplay = (rpId) => {
-    state.roleplayProgress[rpId] = 0;
-    saveState();
-    renderRoleplayStep();
-  };
-
-  /* --------------------------------------------------------------------------
-     6. Winter Tips
-     -------------------------------------------------------------------------- */
-  function renderWinterTips() {
-    const container = document.getElementById('winter-tips-container');
-    container.innerHTML = LONDON_VOCAB_DATA.winterTips.map(tip => `
-      <div class="tip-card">
-        <div class="tip-icon">${tip.icon}</div>
-        <h3 class="tip-title serif-font">${tip.title}</h3>
-        ${tip.ptSubtitle ? `<div style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 6px;">🇵🇹 ${tip.ptSubtitle}</div>` : ''}
-        <p class="tip-text">${tip.text}</p>
-      </div>
-    `).join('');
-  }
-
-  /* --------------------------------------------------------------------------
-     5x5 Vocab Grid Game Engine (5-Stage Challenge)
-     -------------------------------------------------------------------------- */
-  let gridState = {
-    currentStage: 1,       // 1 to 5
-    maxStages: 5,
-    stageScores: [0, 0, 0, 0, 0], // Correct counts per stage
-    stageCompleted: [false, false, false, false, false],
-    currentGrid: [],       // 25 items: { word, ptTranslation, pos, categoryIcon, coord }
-    targetIndices: [],     // Array of 5 target indices
-    selectedIndices: [],   // Array of user-selected indices
-    isChecked: false,      // Whether current stage was checked
-    totalGridScore: state.gridScore || 0,
-    isPlayingAudioSequence: false
-  };
-
-  function getAllVocabWords() {
-    let all = [];
-    LONDON_VOCAB_DATA.categories.forEach(cat => {
-      cat.words.forEach(w => {
-        all.push({
-          word: w.word,
-          ptTranslation: w.ptTranslation,
-          pos: w.pos,
-          example: w.example,
-          categoryIcon: cat.icon
-        });
-      });
-    });
-    return all;
-  }
-
-  function shuffleArray(arr) {
-    const array = [...arr];
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  function initGridGame(isNewSession = false) {
-    if (isNewSession) {
-      gridState.currentStage = 1;
-      gridState.stageScores = [0, 0, 0, 0, 0];
-      gridState.stageCompleted = [false, false, false, false, false];
-    }
-
-    startStage(gridState.currentStage);
-  }
-
-  function startStage(stageNum) {
-    gridState.currentStage = stageNum;
-    gridState.isChecked = false;
-    gridState.selectedIndices = [];
-
-    const pool = getAllVocabWords();
-    const shuffledPool = shuffleArray(pool);
-
-    let gridWords = [];
-    while (gridWords.length < 25) {
-      gridWords = gridWords.concat(shuffledPool);
-    }
-    gridWords = gridWords.slice(0, 25);
-
-    const rowLetters = ['A', 'B', 'C', 'D', 'E'];
-    const colNums = [1, 2, 3, 4, 5];
-
-    gridState.currentGrid = gridWords.map((item, idx) => {
-      const r = Math.floor(idx / 5);
-      const c = idx % 5;
-      return {
-        ...item,
-        coord: `${rowLetters[r]}${colNums[c]}`
-      };
-    });
-
-    const indices = Array.from({ length: 25 }, (_, i) => i);
-    const shuffledIndices = shuffleArray(indices);
-    gridState.targetIndices = shuffledIndices.slice(0, 5);
-
-    renderGridGameUI();
-  }
-
-  function renderGridGameUI() {
-    // 1. Stage Dots & Info Bar
-    const stageTitleEl = document.getElementById('stage-title-label');
-    if (stageTitleEl) stageTitleEl.textContent = `Stage ${gridState.currentStage} of ${gridState.maxStages}`;
-
-    const currentStageNumEl = document.getElementById('current-stage-num');
-    if (currentStageNumEl) currentStageNumEl.textContent = gridState.currentStage;
-
-    const totalSessionScore = gridState.stageScores.reduce((a, b) => a + b, 0);
-    const totalPointsVal = document.getElementById('grid-total-points-val');
-    if (totalPointsVal) totalPointsVal.textContent = `${gridState.totalGridScore} pts`;
-
-    const stageScoreLabel = document.getElementById('stage-score-label');
-    if (stageScoreLabel) {
-      stageScoreLabel.textContent = `Stage Score: ${gridState.stageScores[gridState.currentStage - 1]} / 5 | Total Session: ${totalSessionScore} / 25`;
-    }
-
-    const dotsContainer = document.getElementById('stage-dots-container');
-    if (dotsContainer) {
-      let dotsHtml = '';
-      for (let s = 1; s <= 5; s++) {
-        let dotClass = 'stage-dot';
-        let icon = `S${s}`;
-        if (s < gridState.currentStage || (s === gridState.currentStage && gridState.isChecked)) {
-          dotClass += ' completed';
-          icon = `✓ S${s}`;
-        } else if (s === gridState.currentStage) {
-          dotClass += ' current';
-          icon = `▶ S${s}`;
-        }
-        dotsHtml += `<div class="${dotClass}">${icon}</div>`;
-      }
-      dotsContainer.innerHTML = dotsHtml;
-    }
-
-    // 2. Target Chips
-    const chipsContainer = document.getElementById('target-chips-container');
-    if (chipsContainer) {
-      chipsContainer.innerHTML = gridState.targetIndices.map((targetIdx, i) => {
-        return `
-          <button class="target-chip" data-target-idx="${targetIdx}" data-num="${i + 1}">
-            <span class="target-num-badge">${i + 1}</span>
-            <span>Listen #${i + 1}</span>
-            <span class="chip-speaker-icon">🔊</span>
-          </button>
-        `;
-      }).join('');
-
-      chipsContainer.querySelectorAll('.target-chip').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const targetIdx = parseInt(btn.getAttribute('data-target-idx'), 10);
-          playSingleTarget(btn, targetIdx);
-        });
-      });
-    }
-
-    // 3. Status Badge & Buttons
-    const countBadge = document.getElementById('grid-selection-count');
-    if (countBadge) {
-      const count = gridState.selectedIndices.length;
-      countBadge.textContent = `Selected: ${count} / 5 cells`;
-      if (count > 0) {
-        countBadge.classList.add('active-count');
-      } else {
-        countBadge.classList.remove('active-count');
-      }
-    }
-
-    const checkBtn = document.getElementById('btn-check-grid');
-    const nextStageBtn = document.getElementById('btn-next-stage');
-
-    if (checkBtn) {
-      checkBtn.disabled = (gridState.selectedIndices.length !== 5 || gridState.isChecked);
-      checkBtn.style.display = gridState.isChecked ? 'none' : 'inline-flex';
-    }
-
-    if (nextStageBtn) {
-      if (gridState.isChecked) {
-        nextStageBtn.style.display = 'inline-flex';
-        if (gridState.currentStage < 5) {
-          nextStageBtn.innerHTML = `<span>➡️</span> Next Stage (${gridState.currentStage + 1}/5)`;
-        } else {
-          nextStageBtn.innerHTML = `<span>🎉</span> View Final Results`;
-        }
-      } else {
-        nextStageBtn.style.display = 'none';
-      }
-    }
-
-    // 4. Per-Stage Result Card
-    const resultCard = document.getElementById('grid-result-card');
-    if (resultCard && !gridState.isChecked) {
-      resultCard.style.display = 'none';
-      resultCard.className = 'grid-result-card';
-    }
-
-    // 5. Final Results Banner
-    const finalCard = document.getElementById('grid-final-results-card');
-    if (finalCard && (gridState.currentStage !== 5 || !gridState.isChecked)) {
-      finalCard.style.display = 'none';
-    }
-
-    // 6. Render Board
-    const boardEl = document.getElementById('grid-5x5-board');
-    if (!boardEl) return;
-
-    let html = '';
-    html += `<div class="grid-axis-label"></div>`;
-    for (let c = 1; c <= 5; c++) {
-      html += `<div class="grid-axis-label">${c}</div>`;
-    }
-
-    const rowLetters = ['A', 'B', 'C', 'D', 'E'];
-    for (let r = 0; r < 5; r++) {
-      html += `<div class="grid-axis-label">${rowLetters[r]}</div>`;
-
-      for (let c = 0; c < 5; c++) {
-        const idx = r * 5 + c;
-        const cell = gridState.currentGrid[idx];
-        const isSelected = gridState.selectedIndices.includes(idx);
-        const isTarget = gridState.targetIndices.includes(idx);
-
-        let cellClass = 'grid-cell';
-        let statusIcon = '';
-
-        if (gridState.isChecked) {
-          if (isSelected && isTarget) {
-            cellClass += ' correct';
-            statusIcon = '<span class="cell-status-icon">✅</span>';
-          } else if (isSelected && !isTarget) {
-            cellClass += ' incorrect';
-            statusIcon = '<span class="cell-status-icon">❌</span>';
-          } else if (!isSelected && isTarget) {
-            cellClass += ' missed';
-            statusIcon = '<span class="cell-status-icon">💡</span>';
-          }
-        } else if (isSelected) {
-          cellClass += ' selected';
-          statusIcon = '<span class="cell-status-icon">✔️</span>';
-        }
-
-        html += `
-          <div class="${cellClass}" data-cell-idx="${idx}">
-            <span class="cell-coord-badge">${cell.coord}</span>
-            <div class="cell-word-text">${cell.word}</div>
-            <div class="cell-hint-text">${cell.categoryIcon}</div>
-            ${statusIcon}
-          </div>
-        `;
-      }
-    }
-
-    boardEl.innerHTML = html;
-
-    boardEl.querySelectorAll('.grid-cell').forEach(cellEl => {
-      cellEl.addEventListener('click', () => {
-        const cellIdx = parseInt(cellEl.getAttribute('data-cell-idx'), 10);
-        handleCellClick(cellIdx);
-      });
-    });
-  }
-
-  function handleCellClick(idx) {
-    const item = gridState.currentGrid[idx];
-    if (!item) return;
-
-    if (gridState.isChecked) {
-      speakWord(item.word);
-    } else {
-      const selectedPos = gridState.selectedIndices.indexOf(idx);
-      if (selectedPos >= 0) {
-        gridState.selectedIndices.splice(selectedPos, 1);
-      } else {
-        if (gridState.selectedIndices.length < 5) {
-          gridState.selectedIndices.push(idx);
-          speakWord(item.word);
-        } else {
-          speakWord("You have already selected 5 items!");
-        }
-      }
-      renderGridGameUI();
-    }
-  }
-
-  function playSingleTarget(chipBtn, targetIdx) {
-    const item = gridState.currentGrid[targetIdx];
-    if (!item) return;
-
-    if (chipBtn) chipBtn.classList.add('playing');
-    speakWord(item.word, () => {
-      if (chipBtn) chipBtn.classList.remove('playing');
-    });
-  }
-
-  function playAllTargets() {
-    if (gridState.isPlayingAudioSequence) return;
-    gridState.isPlayingAudioSequence = true;
-
-    const playBtn = document.getElementById('btn-play-all-targets');
-    if (playBtn) {
-      playBtn.disabled = true;
-      playBtn.innerHTML = `<span>🔊</span> Playing 5 Words...`;
-    }
-
-    let currentStep = 0;
-
-    function playNext() {
-      if (currentStep >= gridState.targetIndices.length) {
-        gridState.isPlayingAudioSequence = false;
-        if (playBtn) {
-          playBtn.disabled = false;
-          playBtn.innerHTML = `<span>▶️</span> Replay All 5 Words`;
-        }
-        return;
-      }
-
-      const targetIdx = gridState.targetIndices[currentStep];
-      const item = gridState.currentGrid[targetIdx];
-      
-      const chips = document.querySelectorAll('.target-chip');
-      if (chips[currentStep]) chips[currentStep].classList.add('playing');
-
-      speakWord(`Number ${currentStep + 1}: ${item.word}`, () => {
-        if (chips[currentStep]) chips[currentStep].classList.remove('playing');
-        currentStep++;
-        setTimeout(playNext, 600);
-      });
-    }
-
-    playNext();
-  }
-
-  function checkGridAnswers() {
-    if (gridState.selectedIndices.length !== 5 || gridState.isChecked) return;
-
-    gridState.isChecked = true;
-    let correctCount = 0;
-
-    gridState.selectedIndices.forEach(idx => {
-      if (gridState.targetIndices.includes(idx)) {
-        correctCount++;
-      }
-    });
-
-    gridState.stageScores[gridState.currentStage - 1] = correctCount;
-    gridState.stageCompleted[gridState.currentStage - 1] = true;
-
-    const earnedPoints = correctCount * 20;
-    gridState.totalGridScore = (gridState.totalGridScore || 0) + earnedPoints;
-    state.gridScore = gridState.totalGridScore;
-    saveState();
-
-    renderGridGameUI();
-
-    const resultCard = document.getElementById('grid-result-card');
-    if (resultCard) {
-      resultCard.style.display = 'block';
-      let title = '';
-      let msg = '';
-
-      if (correctCount === 5) {
-        resultCard.className = 'grid-result-card result-success';
-        title = `🎉 PERFECT Stage ${gridState.currentStage}! (5/5 Correct)`;
-        msg = `Fantastic listening, Gabriela! You earned <strong>+100 points</strong>. Click <strong>"Next Stage"</strong> to continue!`;
-        speakWord(`Stage ${gridState.currentStage} complete! Perfect five out of five!`);
-      } else if (correctCount >= 3) {
-        resultCard.className = 'grid-result-card result-partial';
-        title = `👏 Stage ${gridState.currentStage} Complete! (${correctCount}/5 Correct)`;
-        msg = `You earned <strong>+${earnedPoints} points</strong>! Look at the gold cards 💡 for missed targets. Click <strong>"Next Stage"</strong> when ready!`;
-        speakWord(`Stage ${gridState.currentStage} complete! You got ${correctCount} out of 5!`);
-      } else {
-        resultCard.className = 'grid-result-card result-try';
-        title = `💪 Stage ${gridState.currentStage} Complete (${correctCount}/5 Correct)`;
-        msg = `You earned <strong>+${earnedPoints} points</strong>. Click on any card to practice its audio, then proceed to Next Stage!`;
-        speakWord(`Stage ${gridState.currentStage} done! Keep going!`);
-      }
-
-      resultCard.innerHTML = `
-        <h3 style="margin-bottom: 6px; font-size: 1.15rem;">${title}</h3>
-        <p style="font-size: 0.95rem;">${msg}</p>
-      `;
-    }
-
-    if (gridState.currentStage === 5) {
-      showFinalResultsCard();
-    }
-  }
-
-  function nextStage() {
-    if (gridState.currentStage < 5) {
-      startStage(gridState.currentStage + 1);
-    } else {
-      showFinalResultsCard();
-    }
-  }
-
-  function showFinalResultsCard() {
-    const finalCard = document.getElementById('grid-final-results-card');
-    if (!finalCard) return;
-
-    const totalCorrect = gridState.stageScores.reduce((a, b) => a + b, 0);
-    const totalMax = 25;
-    const sessionPoints = totalCorrect * 20;
-
-    let stars = '⭐⭐⭐⭐⭐';
-    if (totalCorrect < 15) stars = '⭐⭐⭐';
-    else if (totalCorrect < 20) stars = '⭐⭐⭐⭐';
-
-    finalCard.style.display = 'block';
-    finalCard.innerHTML = `
-      <div class="final-stars-row">${stars}</div>
-      <h2 class="final-title">🏆 5-Stage Vocab Grid Challenge Completed!</h2>
-      <p class="final-desc">Wonderful work, Gabriela! You completed all 5 stages of the London Vocab Grid Game.</p>
-      
-      <div class="final-score-pill">
-        Overall Score: ${totalCorrect} / ${totalMax} Correct (${sessionPoints} pts)
-      </div>
-
-      <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
-        Stage Breakdown: ${gridState.stageScores.map((s, i) => `Stage ${i + 1}: ${s}/5`).join(' • ')}
-      </div>
-
-      <button class="btn-primary" id="btn-restart-game-final" style="padding: 12px 28px;">
-        <span>🎮</span> Start New 5-Stage Challenge
-      </button>
-    `;
-
-    speakWord(`Congratulations Gabriela! You completed all five stages of the Vocab Grid Challenge! Your total score is ${totalCorrect} out of 25!`);
-
-    const restartFinalBtn = document.getElementById('btn-restart-game-final');
-    if (restartFinalBtn) {
-      restartFinalBtn.addEventListener('click', () => {
-        initGridGame(true);
-      });
-    }
-  }
-
-  // Event Listeners for Grid Controls
-  const btnPlayAll = document.getElementById('btn-play-all-targets');
-  if (btnPlayAll) {
-    btnPlayAll.addEventListener('click', playAllTargets);
-  }
-
-  const btnCheckGrid = document.getElementById('btn-check-grid');
-  if (btnCheckGrid) {
-    btnCheckGrid.addEventListener('click', checkGridAnswers);
-  }
-
-  const btnNextStage = document.getElementById('btn-next-stage');
-  if (btnNextStage) {
-    btnNextStage.addEventListener('click', nextStage);
-  }
-
-  const btnRestart5Stages = document.getElementById('btn-restart-5stages');
-  if (btnRestart5Stages) {
-    btnRestart5Stages.addEventListener('click', () => {
-      initGridGame(true);
-    });
-  }
-
-
-  /* --------------------------------------------------------------------------
-     7. Progress UI & Teacher Report Exporter
-     -------------------------------------------------------------------------- */
-  function updateProgressUI() {
-    let totalQuestions = 0;
-    LONDON_VOCAB_DATA.categories.forEach(c => {
-      totalQuestions += c.quizzes.length;
-    });
-
-    const completedKeys = Object.keys(state.completedQuizzes);
-    const completedCount = completedKeys.length;
-    
-    let quizScore = 0;
-    completedKeys.forEach(k => {
-      quizScore += (state.completedQuizzes[k].score || 0);
-    });
-
-    const gridScore = state.gridScore || 0;
-    const totalScore = quizScore + gridScore;
-
-    const percent = totalQuestions > 0 ? Math.round((completedCount / totalQuestions) * 100) : 0;
-
-    // Update Header
-    document.getElementById('header-score-val').textContent = `${totalScore} pts`;
-    document.getElementById('header-progress-val').textContent = `${percent}%`;
-
-    // Update Progress Tab
-    document.getElementById('progress-percent-label').textContent = `${percent}% (${completedCount}/${totalQuestions} completed)`;
-    document.getElementById('progress-bar-fill').style.width = `${percent}%`;
-
-    // Summary Text
-    const summaryTextEl = document.getElementById('summary-report-text');
-    if (summaryTextEl) {
-      summaryTextEl.textContent = generateReportText(completedCount, totalQuestions, quizScore, gridScore, totalScore, percent);
-    }
-  }
-
-  function generateReportText(completedCount, totalQuestions, quizScore, gridScore, totalScore, percent) {
-    const dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-    return `========================================
-🇬🇧 GABRIELA'S LONDON ESL HOMEWORK REPORT
-Date: ${dateStr}
-========================================
-Student Name: Gabriela
-Destination: London, UK (Jan/Feb Trip)
-
-🏆 Total Score: ${totalScore} points
-   • Quiz Score: ${quizScore} pts
-   • 5x5 Vocab Grid Game Score: ${gridScore} pts
-📊 Quiz Completion Progress: ${percent}% (${completedCount} of ${totalQuestions} Quizzes Completed)
-
-Topic Breakdown:
-${LONDON_VOCAB_DATA.categories.map(cat => {
-  const catQuizzes = cat.quizzes;
-  const doneInCat = catQuizzes.filter(q => state.completedQuizzes[q.id]);
-  return ` • ${cat.title}: ${doneInCat.length}/${catQuizzes.length} finished`;
-}).join('\n')}
-
-Note: Completed via London Travel Homework Hub!
-========================================`;
-  }
-
-  // Copy report button
-  const copyBtn = document.getElementById('btn-copy-report');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      const summaryText = document.getElementById('summary-report-text').textContent;
-      navigator.clipboard.writeText(summaryText).then(() => {
-        const orig = copyBtn.innerHTML;
-        copyBtn.innerHTML = `<span>✓</span> Copied to Clipboard!`;
-        setTimeout(() => { copyBtn.innerHTML = orig; }, 2500);
-      }).catch(err => {
-        alert('Could not copy report. Please select and copy manually.');
-      });
-    });
-  }
-
-  // Download file button (for Preply upload)
-  const downloadBtn = document.getElementById('btn-download-report');
-  if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
-      const summaryText = document.getElementById('summary-report-text').textContent;
-      const blob = new Blob([summaryText], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `Gabriela_London_ESL_Homework.txt`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-
-      const orig = downloadBtn.innerHTML;
-      downloadBtn.innerHTML = `<span>✓</span> Downloaded!`;
-      setTimeout(() => { downloadBtn.innerHTML = orig; }, 2500);
-    });
-  }
-
-
-  // Reset button
-  const resetBtn = document.getElementById('btn-reset-progress');
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to reset all homework progress for Gabriela?')) {
-        state.completedQuizzes = {};
-        state.roleplayProgress = {};
-        state.gridScore = 0;
-        gridState.totalGridScore = 0;
-        saveState();
-        renderQuizzes();
-        renderRoleplayStep();
-        initGridGame();
-        alert('Progress reset successfully!');
-      }
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     5. Visual Learning Cards Renderer
+     3. Visual Dilemma Cards Renderer
      -------------------------------------------------------------------------- */
   function renderVisualCards() {
     const container = document.getElementById('visual-cards-container');
@@ -1054,29 +123,31 @@ Note: Completed via London Travel Homework Hub!
         </div>
         <div class="visual-card-body">
           <h3 class="visual-card-title">${card.title}</h3>
-          <div class="visual-card-subtitle">${card.subtitle}</div>
+          <div class="visual-card-subtitle">${card.category}</div>
           <div class="visual-card-pt">🇵🇹 ${card.ptTranslation}</div>
-          <p class="visual-card-desc">${card.description}</p>
-          
+          <p class="visual-card-desc">"${card.description}"</p>
+
           <div class="visual-vocab-section">
-            <h4 class="visual-section-heading">🎯 Target Words & Audio:</h4>
+            <h4 class="visual-section-heading">🗣️ Useful Target Phrases:</h4>
             <div class="visual-vocab-chips">
-              ${card.targetVocab.map(v => `
+              ${card.targetPhrases.map(p => `
                 <div class="vocab-chip">
-                  <button class="audio-btn-sm" title="Listen to pronunciation" onclick="window.playAudio('${v.word.replace(/'/g, "\\'")}')">🔊</button>
+                  <button class="audio-btn-sm" title="Listen" onclick="window.playAudio('${p.replace(/'/g, "\\'")}')">🔊</button>
                   <div class="vocab-chip-info">
-                    <strong style="color: var(--text-dark);">${v.word}</strong>
-                    <span class="phonetic" style="font-size: 0.8rem; color: var(--primary); font-family: monospace;">${v.phonetic}</span>
-                    <span class="pt" style="font-size: 0.82rem; color: var(--text-muted);">🇵🇹 ${v.translation}</span>
+                    <strong style="color: var(--text-dark); font-size: 0.88rem;">${p}</strong>
                   </div>
                 </div>
               `).join('')}
             </div>
           </div>
-          
-          <div class="visual-speaking-prompt">
-            <span style="font-size: 0.9rem; font-weight: 600; color: var(--primary);">💬 Speaking Prompt for Preply Class:</span>
-            <p style="font-size: 0.95rem; font-style: italic; color: var(--text-dark); margin-top: 4px;">"${card.speakingPrompt}"</p>
+
+          <div class="visual-flow-box">
+            <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 6px;">🔄 3-Step Discussion Flow:</h4>
+            <ol style="font-size: 0.88rem; color: var(--text-dark); padding-left: 18px; display: flex; flex-direction: column; gap: 4px;">
+              <li><strong>1. The Choice:</strong> ${card.discussionFlow.step1}</li>
+              <li><strong>2. The Justification:</strong> ${card.discussionFlow.step2}</li>
+              <li><strong>3. Counter-Argument:</strong> ${card.discussionFlow.step3}</li>
+            </ol>
           </div>
         </div>
       </div>
@@ -1084,7 +155,7 @@ Note: Completed via London Travel Homework Hub!
   }
 
   /* --------------------------------------------------------------------------
-     6. Teacher Lesson Plan Renderer
+     4. Teacher Lesson Plan Renderer
      -------------------------------------------------------------------------- */
   function renderTeacherLessonPlan() {
     const container = document.getElementById('teacher-plan-container');
@@ -1106,19 +177,13 @@ Note: Completed via London Travel Homework Hub!
           <span class="meta-tag">📊 <strong>Level:</strong> ${plan.level}</span>
           <span class="meta-tag">👩‍🎓 <strong>Student:</strong> ${plan.studentProfile}</span>
         </div>
-      </div>
-
-      <div class="plan-goals-card" style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
-        <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-          <span>🎯</span> Lesson Objectives & Core Goals
-        </h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-          ${plan.lessonGoals.map(g => `<li style="display: flex; gap: 8px; font-size: 0.95rem;"><span>✨</span> <span>${g}</span></li>`).join('')}
-        </ul>
+        <p style="font-size: 0.95rem; color: var(--text-dark); background: var(--bg-gradient-start); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 24px;">
+          <strong>Focus:</strong> ${plan.focus}
+        </p>
       </div>
 
       <h4 class="serif-font" style="font-size: 1.3rem; color: var(--text-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-        <span>⏰</span> 50-Minute Step-by-Step Lesson Timeline
+        <span>⏰</span> 50–60 Minute Step-by-Step Lesson Timeline
       </h4>
 
       <div class="timeline-stepper">
@@ -1126,20 +191,58 @@ Note: Completed via London Travel Homework Hub!
           <div class="timeline-step-card">
             <div class="step-time-badge">${step.time}</div>
             <div class="step-card-content">
-              <h4 class="step-stage-title">Stage ${idx + 1}: ${step.stage}</h4>
-              <p style="margin-bottom: 8px; font-size: 0.95rem; color: var(--text-dark);"><strong>Activity:</strong> ${step.activity}</p>
-              <div style="background: var(--primary-light); border-left: 3px solid var(--primary); padding: 10px 14px; border-radius: 6px; font-size: 0.92rem; color: var(--text-dark); margin-bottom: 8px;">
-                <strong>🗣️ Suggested Teacher Prompt:</strong><br>
-                <em>${step.teacherPrompt}</em>
+              <h4 class="step-stage-title">${step.stage}</h4>
+              <p style="margin-bottom: 6px; font-size: 0.92rem; color: var(--primary); font-weight: 600;">Goal: ${step.goal}</p>
+              <p style="margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dark); whitespace: pre-line;">${step.activity}</p>
+              <div style="background: var(--primary-light); border-left: 3px solid var(--primary); padding: 10px 14px; border-radius: 6px; font-size: 0.92rem; color: var(--text-dark);">
+                <strong>💡 Teacher Note / Prompt:</strong><br>
+                <em>"${step.teacherPrompt}"</em>
               </div>
-              ${step.corrections ? `
-                <div class="corrections-box" style="background: #fff8f8; border: 1px dashed var(--secondary); padding: 12px 16px; border-radius: 8px; margin-top: 10px;">
-                  <strong style="color: var(--error); font-size: 0.9rem;">🇵🇹 Portuguese ESL Corrections to Highlight:</strong>
-                  <ul style="list-style: none; margin-top: 6px; display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem;">
-                    ${step.corrections.map(c => `<li>${c}</li>`).join('')}
-                  </ul>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="teacher-tips-section" style="margin-top: 32px;">
+        <h4 class="serif-font" style="font-size: 1.3rem; color: var(--text-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+          <span>💡</span> Teacher's Tips for Adult Learners & Portuguese Speakers
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+          ${plan.teacherTips.map(tip => `
+            <div style="background: var(--surface); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+              <h5 style="color: var(--primary); font-size: 1rem; margin-bottom: 6px;">✨ ${tip.title}</h5>
+              <p style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5;">${tip.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  /* --------------------------------------------------------------------------
+     5. Functional Language Renderer
+     -------------------------------------------------------------------------- */
+  function renderFunctionalPhrases() {
+    const container = document.getElementById('functional-phrases-container');
+    if (!container || !LONDON_VOCAB_DATA.functionalLanguage) return;
+
+    container.innerHTML = `
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        ${LONDON_VOCAB_DATA.functionalLanguage.map(cat => `
+          <div class="phrase-cat-card" style="background: var(--surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.2rem; margin-bottom: 2px;">${cat.category}</h3>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">${cat.ptSubtitle}</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              ${cat.phrases.map(p => `
+                <div style="background: var(--bg-gradient-start); border: 1px solid var(--border-color); padding: 10px 12px; border-radius: var(--radius-sm); display: flex; align-items: flex-start; gap: 10px;">
+                  <button class="audio-btn-sm" style="margin-top: 2px;" onclick="window.playAudio('${p.text.replace(/'/g, "\\'")}')">🔊</button>
+                  <div style="display: flex; flex-direction: column;">
+                    <strong style="color: var(--text-dark); font-size: 0.95rem;">"${p.text}"</strong>
+                    <span style="font-size: 0.8rem; color: var(--primary); font-family: monospace;">${p.phonetic}</span>
+                    <span style="font-size: 0.82rem; color: var(--text-muted);">🇵🇹 ${p.pt}</span>
+                  </div>
                 </div>
-              ` : ''}
+              `).join('')}
             </div>
           </div>
         `).join('')}
@@ -1148,17 +251,281 @@ Note: Completed via London Travel Homework Hub!
   }
 
   /* --------------------------------------------------------------------------
+     6. Conversation Cards Renderer
+     -------------------------------------------------------------------------- */
+  const cardFilterEl = document.getElementById('card-category-filter');
+  const cardsContainerEl = document.getElementById('conversation-cards-container');
+
+  function renderCardFilters() {
+    if (!cardFilterEl) return;
+    const categories = ['all', 'Category A', 'Category B', 'Category C', 'Category D'];
+    
+    cardFilterEl.innerHTML = categories.map(cat => `
+      <button class="filter-btn ${state.activeCardCat === cat ? 'active' : ''}" data-cat="${cat}">
+        ${cat === 'all' ? '✨ All Cards' : cat}
+      </button>
+    `).join('');
+
+    cardFilterEl.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.activeCardCat = btn.getAttribute('data-cat');
+        renderCardFilters();
+        renderConversationCards();
+      });
+    });
+  }
+
+  function renderConversationCards() {
+    if (!cardsContainerEl || !LONDON_VOCAB_DATA.conversationCards) return;
+
+    let cardsToRender = LONDON_VOCAB_DATA.conversationCards.filter(c => {
+      return state.activeCardCat === 'all' || c.category.startsWith(state.activeCardCat);
+    });
+
+    cardsContainerEl.innerHTML = cardsToRender.map(card => {
+      const selectedIndex = state.selectedCardOptions[card.id];
+
+      return `
+        <div class="dilemma-card" style="background: var(--surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 3px 10px; border-radius: 12px;">
+              ${card.icon} ${card.category}
+            </span>
+            <span style="font-size: 0.82rem; color: var(--text-muted);">${card.ptTitle}</span>
+          </div>
+
+          <h3 class="serif-font" style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 12px;">${card.title}</h3>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 16px; line-height: 1.5;">"${card.question}"</p>
+
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+            ${card.options.map((opt, idx) => `
+              <button class="option-pick-btn ${selectedIndex === idx ? 'selected' : ''}" onclick="window.pickCardOption('${card.id}', ${idx})" style="padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid ${selectedIndex === idx ? 'var(--primary)' : 'var(--border-color)'}; background: ${selectedIndex === idx ? 'var(--primary-light)' : 'var(--surface)'}; text-align: left; font-size: 0.9rem; cursor: pointer; transition: var(--transition);">
+                ${selectedIndex === idx ? '✅' : '⚪'} <strong>Option ${idx === 0 ? 'A' : 'B'}:</strong> ${opt}
+              </button>
+            `).join('')}
+          </div>
+
+          <div style="background: var(--bg-gradient-start); padding: 10px 12px; border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-dark); margin-top: auto; border: 1px dashed var(--border-color);">
+            💡 <strong>Justification Tip:</strong> ${card.prompt}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.pickCardOption = (cardId, optionIdx) => {
+    state.selectedCardOptions[cardId] = optionIdx;
+    saveState();
+    renderConversationCards();
+  };
+
+  /* --------------------------------------------------------------------------
+     7. Homework Quizzes Engine
+     -------------------------------------------------------------------------- */
+  const quizContainerEl = document.getElementById('quiz-questions-container');
+
+  function renderQuizzes() {
+    if (!quizContainerEl || !LONDON_VOCAB_DATA.quizzes) return;
+
+    quizContainerEl.innerHTML = LONDON_VOCAB_DATA.quizzes.map(q => {
+      const isCompleted = !!state.completedQuizzes[q.id];
+      const completedData = state.completedQuizzes[q.id] || {};
+
+      return `
+        <div class="quiz-card" style="background: var(--surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm); margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span class="quiz-badge" style="background: var(--primary-light); color: var(--primary); padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 700;">
+              ✏️ ${q.category}
+            </span>
+            ${isCompleted ? `
+              <span style="font-size: 0.85rem; font-weight: 700; color: ${completedData.correct ? 'var(--success)' : 'var(--error)'};">
+                ${completedData.correct ? '✓ Correct (+10 pts)' : '✗ Try Again'}
+              </span>
+            ` : ''}
+          </div>
+
+          <h4 style="font-size: 1rem; color: var(--text-dark); margin-bottom: 12px;">
+            ${q.question || q.sentence}
+          </h4>
+
+          ${q.type === 'mcq' ? `
+            <div class="mcq-options" style="display: flex; flex-direction: column; gap: 8px;">
+              ${q.options.map((opt, idx) => `
+                <button class="mcq-btn ${isCompleted && completedData.answerIndex === idx ? (completedData.correct ? 'correct' : 'incorrect') : ''}" 
+                        onclick="window.submitMCQ('${q.id}', ${idx})" 
+                        style="padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); text-align: left; font-size: 0.9rem; cursor: pointer;">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+          ` : `
+            <div class="fill-blank-row" style="display: flex; gap: 8px;">
+              <input type="text" id="input-${q.id}" class="blank-input" placeholder="Type answer here..." value="${isCompleted ? completedData.answer : ''}" style="flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: var(--radius-sm);" />
+              <button class="btn-primary-sm" onclick="window.submitFillBlank('${q.id}')">Submit</button>
+            </div>
+          `}
+
+          ${isCompleted ? `
+            <div class="explanation-box" style="margin-top: 12px; padding: 10px; background: var(--bg-gradient-start); border-radius: var(--radius-sm); font-size: 0.88rem; color: var(--text-dark);">
+              💡 <strong>Explanation:</strong> ${q.explanation || 'Correct answer: ' + q.correctAnswer}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.submitMCQ = (quizId, optionIndex) => {
+    const quiz = LONDON_VOCAB_DATA.quizzes.find(q => q.id === quizId);
+    if (!quiz) return;
+
+    const isCorrect = optionIndex === quiz.correct;
+    state.completedQuizzes[quizId] = {
+      correct: isCorrect,
+      answerIndex: optionIndex,
+      score: isCorrect ? 10 : 0
+    };
+    saveState();
+    renderQuizzes();
+  };
+
+  window.submitFillBlank = (quizId) => {
+    const quiz = LONDON_VOCAB_DATA.quizzes.find(q => q.id === quizId);
+    const inputEl = document.getElementById(`input-${quizId}`);
+    if (!quiz || !inputEl) return;
+
+    const userVal = inputEl.value.trim().toLowerCase();
+    const isCorrect = userVal === quiz.correctAnswer.toLowerCase();
+
+    state.completedQuizzes[quizId] = {
+      correct: isCorrect,
+      answer: inputEl.value,
+      score: isCorrect ? 10 : 0
+    };
+    saveState();
+    renderQuizzes();
+  };
+
+  /* --------------------------------------------------------------------------
+     8. Progress UI & Report Generator
+     -------------------------------------------------------------------------- */
+  function updateProgressUI() {
+    const totalQuizzes = LONDON_VOCAB_DATA.quizzes ? LONDON_VOCAB_DATA.quizzes.length : 0;
+    let completedCount = 0;
+    let quizScore = 0;
+
+    Object.values(state.completedQuizzes).forEach(cq => {
+      if (cq.correct) {
+        completedCount++;
+        quizScore += cq.score || 10;
+      }
+    });
+
+    const percent = totalQuizzes > 0 ? Math.round((completedCount / totalQuizzes) * 100) : 0;
+
+    // Header
+    const scoreValEl = document.getElementById('header-score-val');
+    const progValEl = document.getElementById('header-progress-val');
+    if (scoreValEl) scoreValEl.textContent = `${quizScore} pts`;
+    if (progValEl) progValEl.textContent = `${percent}%`;
+
+    // Progress Tab
+    const labelEl = document.getElementById('progress-percent-label');
+    const fillEl = document.getElementById('progress-bar-fill');
+    if (labelEl) labelEl.textContent = `${percent}% (${completedCount}/${totalQuizzes} completed)`;
+    if (fillEl) fillEl.style.width = `${percent}%`;
+
+    // Summary Text
+    const summaryTextEl = document.getElementById('summary-report-text');
+    if (summaryTextEl) {
+      summaryTextEl.textContent = generateReportText(completedCount, totalQuizzes, quizScore, percent);
+    }
+  }
+
+  function generateReportText(completedCount, totalQuizzes, quizScore, percent) {
+    const dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    const selectedCardsCount = Object.keys(state.selectedCardOptions).length;
+
+    return `========================================
+🌸 GABRIELA'S "WOULD YOU RATHER...?" HOMEWORK REPORT
+Date: ${dateStr}
+========================================
+Student Name: Gabriela
+Target Level: Intermediate (B1/B2)
+Course: Preply ESL Conversational Speaking
+
+🏆 Total Quiz Score: ${quizScore} points
+📊 Homework Completion: ${percent}% (${completedCount} of ${totalQuizzes} Quizzes Passed)
+🎴 Conversation Cards Prepared: ${selectedCardsCount} of 10 Cards Selected
+
+Second Conditional & Functional Language Mastery:
+ • Second Conditional Practice: ${state.completedQuizzes['q_cond1']?.correct ? 'PASSED ✓' : 'Pending'}
+ • Functional Hesitation Phrases: ${state.completedQuizzes['q_phrase1']?.correct ? 'PASSED ✓' : 'Pending'}
+ • Weighing Options & Drawbacks: ${state.completedQuizzes['q_phrase2']?.correct ? 'PASSED ✓' : 'Pending'}
+
+Note: Completed via Gabriela's Preply Speaking Hub!
+========================================`;
+  }
+
+  // Copy report button
+  const copyBtn = document.getElementById('btn-copy-report');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const summaryText = document.getElementById('summary-report-text').textContent;
+      navigator.clipboard.writeText(summaryText).then(() => {
+        const orig = copyBtn.innerHTML;
+        copyBtn.innerHTML = `<span>✓</span> Copied to Clipboard!`;
+        setTimeout(() => { copyBtn.innerHTML = orig; }, 2500);
+      }).catch(err => {
+        alert('Could not copy report. Please select and copy manually.');
+      });
+    });
+  }
+
+  // Download file button
+  const downloadBtn = document.getElementById('btn-download-report');
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      const summaryText = document.getElementById('summary-report-text').textContent;
+      const blob = new Blob([summaryText], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Gabriela_WouldYouRather_Homework.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      const orig = downloadBtn.innerHTML;
+      downloadBtn.innerHTML = `<span>✓</span> Downloaded!`;
+      setTimeout(() => { downloadBtn.innerHTML = orig; }, 2500);
+    });
+  }
+
+  // Reset button
+  const resetBtn = document.getElementById('btn-reset-progress');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to reset all homework progress for Gabriela?')) {
+        state.completedQuizzes = {};
+        state.selectedCardOptions = {};
+        saveState();
+        renderQuizzes();
+        renderConversationCards();
+        alert('Progress reset successfully!');
+      }
+    });
+  }
+
+  /* --------------------------------------------------------------------------
      Initialize App Component Views
      -------------------------------------------------------------------------- */
   renderVisualCards();
   renderTeacherLessonPlan();
-  renderFlashcardFilters();
-  renderFlashcards();
-  renderQuizFilters();
+  renderFunctionalPhrases();
+  renderCardFilters();
+  renderConversationCards();
   renderQuizzes();
-  renderRoleplaySelectors();
-  renderRoleplayStep();
-  renderWinterTips();
-  initGridGame();
   updateProgressUI();
 });

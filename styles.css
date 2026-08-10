@@ -1498,5 +1498,26 @@ h1, h2, h3, .serif-font {
   margin-top: 4px;
 }
 
+/* Cards Grid & Options */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.option-pick-btn:hover {
+  border-color: var(--primary) !important;
+  background: var(--primary-light) !important;
+}
+
+.visual-flow-box {
+  background: var(--bg-gradient-start);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-top: auto;
+}
+
 
 
