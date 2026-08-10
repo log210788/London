@@ -1,65 +1,47 @@
-# 🇬🇧 Gabriela's London Travel & ESL Homework Hub
+# 🌸 Gabriela's "Would You Rather...?" Preply ESL Hub
 
-A web application created for **Gabriela** for her upcoming trip to **London in January/February**. This site serves as her interactive home for learning travel English, practicing London vocabulary, listening to British pronunciation, completing homework quizzes, and simulating real-life London conversations (cafes, airport, hotel check-in, tube transport, and winter travel tips).
+An interactive Preply ESL web application created for **Gabriela** focusing on the **"Would You Rather...?" (Hypothetical Choices & Justifications)** curriculum at an Intermediate (B1/B2) level.
+
+---
+
+## 📱 Two Specialized Entry Views
+
+1. **🌸 Gabriela's Student Homework Portal (`student_homework.html`)**:
+   - **100% Student-Facing** (No teacher notes or lesson plans).
+   - Contains Visual Dilemma Cards, Functional Phrase Bank with British Audio TTS, 10 Interactive Conversation Cards, Second Conditional Quizzes, and a 1-click Preply Report Downloader.
+   - **Direct Link**: [`student_homework.html`](file:///e:/Documents/Gabriela/student_homework.html)
+
+2. **🍎 Teacher & Tutor Hub (`index.html`)**:
+   - Includes the complete **50–60 minute step-by-step Tutor Teaching Plan**, warm-up prompts, 3-Step Discussion Flow guidelines, second conditional feedback instructions, and adult learner teaching tips.
+   - **Direct Link**: [`index.html`](file:///e:/Documents/Gabriela/index.html)
 
 ---
 
 ## 🌟 Key Features
 
-- **📚 Interactive London Vocabulary Flashcards**: 5 core categories (Airport, Tube & Transport, Cafes & Afternoon Tea, Winter Weather & Shopping, British Slang & Etiquette) with phonetic transcriptions, example sentences, and travel tips.
-- **🔊 British Audio Pronunciation**: Built-in Web Speech API TTS to listen to native British English pronunciation for every word and dialogue sentence.
-- **✏️ Interactive Homework Quizzes**: Fill-in-the-blank, multiple choice, and matching questions with immediate feedback, point scores, and hints.
-- **🎭 Real-Life Dialogue Simulator**: Interactive roleplay for Soho cafes, hotel check-in, and local interactions.
-- **🧥 Winter London Travel Guide**: Practical advice for dressing in layers for London's January/February weather (3°C to 9°C), rain gear tips, and escalator etiquette (*stand on the right!*).
-- **📋 Teacher Homework Exporter**: Automatically generates a formatted text report of Gabriela's homework scores that she can copy and send to her ESL teacher via WhatsApp or email.
-- **📱 Fully Responsive & Female-Friendly Design**: Rose-gold and soft winter theme, elegant typography, glassmorphism cards, micro-animations, and zero external build tools required.
+- **🌸 High-Definition Visual Dilemma Cards**: Split visual cards for Lifestyle, Travel, Superpowers, and Food dilemmas.
+- **🔊 British Audio Pronunciation**: Built-in Web Speech API TTS to listen to natural British English pronunciation for all functional phrases.
+- **💬 Functional Language Bank**: Phrases for *Expressing Choice*, *Weighing Pros & Cons*, and *Hesitating / Being Indecisive* with Portuguese translations 🇵🇹.
+- **✏️ Interactive Homework & Second Conditionals**: Auto-graded quizzes with feedback explanations.
+- **📋 1-Click Preply Exporter**: Generates `Gabriela_WouldYouRather_Homework.txt` for Gabriela to upload directly to her teacher on Preply.
+- **🎨 Female Aesthetic**: Rose-gold (`#c86b7b`), blush pink (`#e8a5b8`), gold accents (`#d4af37`), Playfair Display serif typography, and glassmorphism cards.
 
 ---
 
 ## 🚀 How to Publish to GitHub Pages
 
-This project is 100% static (`index.html`, `styles.css`, `app.js`, `vocabulary-data.js`), making it ready for **free GitHub Pages hosting**.
-
-Follow these easy steps to push this project to repository `https://github.com/log210788/London`:
-
-### Step 1: Initialize Git and Commit Files
-Open PowerShell or Terminal in this folder (`e:/Documents/Gabriela`):
+This project is 100% static (`index.html`, `student_homework.html`, `styles.css`, `app.js`, `vocabulary-data.js`), making it ready for **free GitHub Pages hosting**.
 
 ```bash
-git init
 git add .
-git commit -m "Add Gabriela's London ESL Homework website"
+git commit -m "Add student_homework.html for Gabriela without teacher notes"
+git push origin main
 ```
 
-### Step 2: Link to GitHub Repository & Push
-```bash
-git branch -M main
-git remote add origin https://github.com/log210788/London.git
-git push -u origin main
-```
-
-### Step 3: Enable GitHub Pages
-1. Go to your repository on GitHub: `https://github.com/log210788/London`
-2. Click on **Settings** > **Pages** (in the left sidebar).
-3. Under **Build and deployment** -> **Source**, select **Deploy from a branch**.
-4. Under **Branch**, select `main` and `/ (root)`, then click **Save**.
-5. After 1-2 minutes, your website will be live at:
-   **`https://log210788.github.io/London/`**
-
----
-
-## 🛠️ Local Development / Preview
-
-To test locally:
-- Simply double-click `index.html` to open it in any web browser, OR
-- Run a simple local server using Python/Node:
-  ```bash
-  npx serve .
-  # OR
-  python -m http.server 8000
-  ```
+Live student link on GitHub Pages:
+**`https://log210788.github.io/London/student_homework.html`**
 
 ---
 
 ## 💖 Credits
-Made with love for Gabriela's London travel & English learning journey! 🇬🇧✨
+Made with love for Gabriela's ESL speaking journey on Preply! 🌸✨
