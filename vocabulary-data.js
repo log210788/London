@@ -1,5 +1,5 @@
 const LONDON_VOCAB_DATA = {
-  studentName: "Gabriela",
+  studentName: "Student",
   lessonTitle: "Would You Rather...? (Hypothetical Choices & Justifications)",
   targetLevel: "Intermediate (B1/B2)",
   duration: "50–60 minutes",
@@ -10,7 +10,7 @@ const LONDON_VOCAB_DATA = {
     lessonTitle: "Preply 1-on-1 Lesson Plan: 'Would You Rather...?' (Hypothetical Choices & Justifications)",
     duration: "50–60 Minutes",
     level: "Intermediate (B1/B2)",
-    studentProfile: "Gabriela (Portuguese native speaker, intermediate ESL learner)",
+    studentProfile: "Intermediate ESL learner",
     focus: "Spontaneous speaking, expressing preferences, justifying opinions, and weighing pros and cons.",
     
     timeline: [
@@ -18,7 +18,7 @@ const LONDON_VOCAB_DATA = {
         time: "00:00 - 00:10 (5–10 mins)",
         stage: "1. Warm-Up & Concept Intro",
         goal: "Introduce the structure naturally without heavy grammar explanations.",
-        activity: "Ask Gabriela two quick, low-stakes questions to break the ice:\n1. 'Would you rather drink coffee or tea every morning for the rest of your life?'\n2. 'Would you rather have a hot summer vacation or a cold winter vacation?'",
+        activity: "Ask the student two quick, low-stakes questions to break the ice:\n1. 'Would you rather drink coffee or tea every morning for the rest of your life?'\n2. 'Would you rather have a hot summer vacation or a cold winter vacation?'",
         teacherPrompt: "Notice her instinctual answer. If she answers with just one word (e.g. 'Coffee'), gently prompt her for the reason: 'Why coffee? What would you miss about tea?'"
       },
       {
@@ -38,14 +38,14 @@ const LONDON_VOCAB_DATA = {
         stage: "3. 'Would You Rather' Conversation Cards",
         goal: "Engage in deep, spontaneous speaking using the 3-Step Discussion Flow.",
         activity: "Pick 4–6 conversation cards across Lifestyle, Travel, Superpowers, and Food. Apply the 3-Step Discussion Flow for each card:\n1. The Choice: Have her pick an option.\n2. The Justification: Ask her why she chose it using target phrases.\n3. The Counter-Argument: Challenge her choice gently ('But wouldn't you miss...?') to push for deeper speaking.",
-        teacherPrompt: "Use counter-arguments to encourage Gabriela to elaborate and use second conditional patterns ('If I had to choose... I would...')."
+        teacherPrompt: "Use counter-arguments to encourage the student to elaborate and use second conditional patterns ('If I had to choose... I would...')."
       },
       {
         time: "00:50 - 01:00 (5–10 mins)",
         stage: "4. Language Feedback & Real-Life Wrap-Up",
         goal: "Provide constructive feedback and reinforce learning.",
         activity: "• Feedback: Share 2–3 positive examples of phrases she used well, and correct 2–3 minor errors (focus on second conditionals like 'If I would choose' -> 'If I had to choose').\n• Wrap-Up Question: 'Which of the choices today was the hardest for you to make, and why?'",
-        teacherPrompt: "Remind Gabriela to complete her Preply homework worksheet and upload her score report!"
+        teacherPrompt: "Remind the student to complete their Preply homework worksheet and upload their score report!"
       }
     ],
 

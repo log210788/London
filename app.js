@@ -1,9 +1,10 @@
 /* ==========================================================================
-   Gabriela's "Would You Rather...?" Preply Hub - Interactive App Logic
+   Preply "Would You Rather...?" Hub - Interactive App Logic
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const STORAGE_KEY = 'gabriela_would_you_rather_progress';
+  const STORAGE_KEY = 'would_you_rather_progress';
+  const LEGACY_STORAGE_KEY = 'gabriela_would_you_rather_progress';
   
   let state = {
     completedQuizzes: {}, // { quizId: { correct: boolean, answer: string, score: number } }
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load saved state
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
       state.completedQuizzes = parsed.completedQuizzes || {};
@@ -446,11 +447,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
     const selectedCardsCount = Object.keys(state.selectedCardOptions).length;
 
+    const studentName = window.LONDON_VOCAB_DATA?.studentName || "Student";
     return `========================================
-🌸 GABRIELA'S "WOULD YOU RATHER...?" HOMEWORK REPORT
+🌸 PREPLY "WOULD YOU RATHER...?" HOMEWORK REPORT
 Date: ${dateStr}
 ========================================
-Student Name: Gabriela
+Student Name: ${studentName}
 Target Level: Intermediate (B1/B2)
 Course: Preply ESL Conversational Speaking
 
@@ -463,7 +465,7 @@ Second Conditional & Functional Language Mastery:
  • Functional Hesitation Phrases: ${state.completedQuizzes['q_phrase1']?.correct ? 'PASSED ✓' : 'Pending'}
  • Weighing Options & Drawbacks: ${state.completedQuizzes['q_phrase2']?.correct ? 'PASSED ✓' : 'Pending'}
 
-Note: Completed via Gabriela's Preply Speaking Hub!
+Note: Completed via Preply Speaking Hub!
 ========================================`;
   }
 
@@ -491,7 +493,7 @@ Note: Completed via Gabriela's Preply Speaking Hub!
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `Gabriela_WouldYouRather_Homework.txt`;
+      link.download = `WouldYouRather_Homework.txt`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -507,7 +509,7 @@ Note: Completed via Gabriela's Preply Speaking Hub!
   const resetBtn = document.getElementById('btn-reset-progress');
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to reset all homework progress for Gabriela?')) {
+      if (confirm('Are you sure you want to reset all homework progress?')) {
         state.completedQuizzes = {};
         state.selectedCardOptions = {};
         saveState();

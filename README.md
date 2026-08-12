@@ -1,12 +1,12 @@
-# 🌸 Gabriela's "Would You Rather...?" Preply ESL Hub
+# 🌸 "Would You Rather...?" Preply ESL Hub
 
-An interactive Preply ESL web application created for **Gabriela** focusing on the **"Would You Rather...?" (Hypothetical Choices & Justifications)** curriculum at an Intermediate (B1/B2) level.
+An interactive Preply ESL web application focusing on the **"Would You Rather...?" (Hypothetical Choices & Justifications)** curriculum at an Intermediate (B1/B2) level.
 
 ---
 
 ## 📱 Two Specialized Entry Views
 
-1. **🌸 Gabriela's Student Homework Portal (`student_homework.html`)**:
+1. **🌸 Student Homework Portal (`student_homework.html`)**:
    - **100% Student-Facing** (No teacher notes or lesson plans).
    - Contains Visual Dilemma Cards, Functional Phrase Bank with British Audio TTS, 10 Interactive Conversation Cards, Second Conditional Quizzes, and a 1-click Preply Report Downloader.
    - **Direct Link**: [`student_homework.html`](file:///e:/Documents/Gabriela/student_homework.html)
@@ -23,7 +23,7 @@ An interactive Preply ESL web application created for **Gabriela** focusing on t
 - **🔊 British Audio Pronunciation**: Built-in Web Speech API TTS to listen to natural British English pronunciation for all functional phrases.
 - **💬 Functional Language Bank**: Phrases for *Expressing Choice*, *Weighing Pros & Cons*, and *Hesitating / Being Indecisive* with Portuguese translations 🇵🇹.
 - **✏️ Interactive Homework & Second Conditionals**: Auto-graded quizzes with feedback explanations.
-- **📋 1-Click Preply Exporter**: Generates `Gabriela_WouldYouRather_Homework.txt` for Gabriela to upload directly to her teacher on Preply.
+- **📋 1-Click Preply Exporter**: Generates `WouldYouRather_Homework.txt` to upload directly to the teacher on Preply.
 - **🎨 Female Aesthetic**: Rose-gold (`#c86b7b`), blush pink (`#e8a5b8`), gold accents (`#d4af37`), Playfair Display serif typography, and glassmorphism cards.
 
 ---
@@ -34,7 +34,7 @@ This project is 100% static (`index.html`, `student_homework.html`, `styles.css`
 
 ```bash
 git add .
-git commit -m "Add student_homework.html for Gabriela without teacher notes"
+git commit -m "Update homework portal and curriculum roadmap"
 git push origin main
 ```
 
@@ -44,4 +44,4 @@ Live student link on GitHub Pages:
 ---
 
 ## 💖 Credits
-Made with love for Gabriela's ESL speaking journey on Preply! 🌸✨
+Made with love for Preply ESL speaking journey! 🌸✨
