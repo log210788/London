@@ -119,8 +119,16 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGridGame();
   }
 
-  window.switchWeek = (weekNum) => {
+  window.switchWeek = (weekNum, autoScroll = true) => {
     setWeek(weekNum);
+    if (autoScroll) {
+      setTimeout(() => {
+        const targetEl = document.getElementById('active-homework-section');
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50);
+    }
   };
 
   function updateHeaderAndHeroUI() {
