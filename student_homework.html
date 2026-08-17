@@ -20,7 +20,7 @@
     
     <!-- Hero Header Banner -->
     <header class="hero-header">
-      <div class="hero-badge">
+      <div class="hero-badge" id="hero-active-week-badge">
         <span>🌸 Preply Student Homework Portal</span>
         <span>•</span>
         <span>Target: B1/B2 Intermediate</span>
@@ -28,15 +28,15 @@
         <span>🇵🇹 Portuguese Support</span>
       </div>
 
-      <h1 class="hero-title">Welcome! ✨</h1>
+      <h1 class="hero-title" id="hero-topic-title">The Art of Storytelling & Personal Anecdotes ✨</h1>
       <p class="hero-subtitle">
-        Your personal interactive space for "Would You Rather...?" practice, expressing choices, weighing pros & cons, second conditionals, and completing your Preply homework!
+        Your personal interactive space for Preply English speaking practice, personal anecdotes, narrative tenses, the Add-the-Grid Game, and homework reports!
       </p>
       
       <div class="hero-stats-row">
         <div class="stat-pill">
           <span>💬 Topic:</span>
-          <strong>Would You Rather...?</strong>
+          <strong>Storytelling & Personal Anecdotes</strong>
         </div>
         <div class="stat-pill">
           <span>📊 Level:</span>
@@ -47,25 +47,28 @@
           <strong id="header-score-val">0 pts</strong>
         </div>
         <div class="stat-pill">
-          <span>🏆 Progress:</span>
+          <span>🏆 Quiz Completion:</span>
           <strong id="header-progress-val">0%</strong>
         </div>
       </div>
     </header>
 
-    <!-- Navigation Tabs (Student Version - No Teacher Notes) -->
+    <!-- Week Switcher Controller -->
+    <div id="week-switcher-container"></div>
+
+    <!-- Navigation Tabs (Student Version) -->
     <nav class="nav-tabs" id="main-nav-tabs" role="tablist">
       <button class="tab-btn active" data-tab="visuals" role="tab">
-        <span>🌸</span> Visual Dilemmas
+        <span>🌸</span> Visual Scene Cards
       </button>
       <button class="tab-btn" data-tab="phrases" role="tab">
         <span>💬</span> Phrase Bank
       </button>
       <button class="tab-btn" data-tab="cards" role="tab">
-        <span>🎴</span> Conversation Cards
+        <span>🎴</span> Conversation Prompts
       </button>
       <button class="tab-btn" data-tab="quizzes" role="tab">
-        <span>✏️</span> Interactive Homework
+        <span>🧩</span> Grid Game & Homework
       </button>
       <button class="tab-btn" data-tab="progress" role="tab">
         <span>📊</span> My Progress
@@ -80,7 +83,7 @@
         <div class="card-section">
           <div class="section-header">
             <div>
-              <h2 class="section-title"><span>🌸</span> Visual Dilemma Cards</h2>
+              <h2 class="section-title"><span>🌸</span> Visual Scene & Anecdote Cards</h2>
               <p class="section-desc">Interactive visual cards with high-definition scenes, target phrases, native audio pronunciation, and Portuguese translation helpers!</p>
             </div>
           </div>
@@ -97,7 +100,7 @@
           <div class="section-header">
             <div>
               <h2 class="section-title"><span>💬</span> Phrase Bank & Natural Expressions</h2>
-              <p class="section-desc">Master natural phrases for expressing choices, weighing pros & cons, and hesitating politely. Click the speaker icon to listen to British audio pronunciation!</p>
+              <p class="section-desc">Master natural phrases for story hooks, building tension, dramatic pauses, and reflecting. Click the speaker icon to listen to British audio pronunciation!</p>
             </div>
           </div>
 
@@ -112,8 +115,8 @@
         <div class="card-section">
           <div class="section-header">
             <div>
-              <h2 class="section-title"><span>🎴</span> "Would You Rather...?" Conversation Cards</h2>
-              <p class="section-desc">10 interactive dilemma cards across Lifestyle, Travel, Superpowers, and Food. Click your preferred option to practice justifying your choices!</p>
+              <h2 class="section-title"><span>🎴</span> Storytelling & Anecdote Prompt Cards</h2>
+              <p class="section-desc">10 interactive prompt cards across funny mishaps, travel twists, coincidences, and surprises. Click your preferred story option to practice!</p>
             </div>
           </div>
 
@@ -128,13 +131,20 @@
         </div>
       </section>
 
-      <!-- TAB 4: INTERACTIVE HOMEWORK QUIZZES -->
+      <!-- TAB 4: INTERACTIVE HOMEWORK & ADD THE GRID GAME -->
       <section id="tab-quizzes" class="tab-content" role="tabpanel">
         <div class="card-section">
-          <div class="section-header">
+          
+          <!-- Main Grid Game Container -->
+          <div id="grid-game-container">
+            <!-- Rendered dynamically by JS -->
+          </div>
+
+          <!-- Additional Quizzes -->
+          <div class="section-header" style="margin-top: 36px;">
             <div>
-              <h2 class="section-title"><span>✏️</span> Preply Homework & Grammar Practice</h2>
-              <p class="section-desc">Complete these exercises to practice second conditionals ("If I had to choose... I would pick...") and functional expressions. Your score saves automatically!</p>
+              <h2 class="section-title"><span>✏️</span> Grammar & Narrative Tenses Exercises</h2>
+              <p class="section-desc">Complete these auto-graded practice questions to test past simple, past continuous, past perfect, and storytelling transition connectors!</p>
             </div>
           </div>
 

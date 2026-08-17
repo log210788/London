@@ -1,6 +1,8 @@
-# 🌸 "Would You Rather...?" Preply ESL Hub
+# 🌸 Preply Conversational English & Homework Hub
 
-An interactive Preply ESL web application focusing on the **"Would You Rather...?" (Hypothetical Choices & Justifications)** curriculum at an Intermediate (B1/B2) level.
+An interactive Preply ESL web application featuring an **8-Week Intermediate (B1/B2) Speaking Curriculum** with active week support for:
+- **Week 1**: *"Would You Rather...?" (Hypothetical Choices & Second Conditionals)*
+- **Week 2**: *"The Art of Storytelling & Personal Anecdotes"* + **🧩 The Add-the-Grid Story Game**
 
 ---
 
@@ -8,38 +10,40 @@ An interactive Preply ESL web application focusing on the **"Would You Rather...
 
 1. **🌸 Student Homework Portal (`student_homework.html`)**:
    - **100% Student-Facing** (No teacher notes or lesson plans).
-   - Contains Visual Dilemma Cards, Functional Phrase Bank with British Audio TTS, 10 Interactive Conversation Cards, Second Conditional Quizzes, and a 1-click Preply Report Downloader.
+   - Features Visual Scene Cards, Storytelling Phrase Bank with British Audio TTS, 10 Interactive Anecdote Prompt Cards, **🧩 The Storyteller's Add-the-Grid Challenge Game**, Narrative Tenses Quizzes, and a 1-click Preply Report Exporter.
    - **Direct Link**: [`student_homework.html`](file:///e:/Documents/Gabriela/student_homework.html)
 
 2. **🍎 Teacher & Tutor Hub (`index.html`)**:
-   - Includes the complete **50–60 minute step-by-step Tutor Teaching Plan**, warm-up prompts, 3-Step Discussion Flow guidelines, second conditional feedback instructions, and adult learner teaching tips.
+   - Includes step-by-step **50–60 minute Tutor Teaching Plans** for Week 1 & Week 2, warm-up prompts, 4-Stage Story Matrix guidelines, narrative tenses feedback notes, and Portuguese speaker tips 🇵🇹.
    - **Direct Link**: [`index.html`](file:///e:/Documents/Gabriela/index.html)
+
+---
+
+## 🧩 Week 2 Main Game: "The Storyteller's Add-The-Grid Game"
+
+- **4x4 Grid Matrix Board**: Students build 4 complete Story Anecdotes across 16 grid cells (1. Hook ➔ 2. Background Scene ➔ 3. Plot Twist ➔ 4. Resolution).
+- **Interactive Challenge Modals**: Selecting story blocks prompts students to complete narrative tense challenges (Past Simple vs Past Continuous vs Past Perfect) and time connectors (*"Out of nowhere...", "Before I knew it...", "Looking back..."*).
+- **Combo Arc Unlocks**: Completing a full 4-tile story row triggers glowing celebration animations and awards bonus points (+100 Pts).
+- **Native British TTS Audio**: Clicking completed grid tiles reads the full sentence aloud with natural intonation and dramatic pauses!
 
 ---
 
 ## 🌟 Key Features
 
-- **🌸 High-Definition Visual Dilemma Cards**: Split visual cards for Lifestyle, Travel, Superpowers, and Food dilemmas.
-- **🔊 British Audio Pronunciation**: Built-in Web Speech API TTS to listen to natural British English pronunciation for all functional phrases.
-- **💬 Functional Language Bank**: Phrases for *Expressing Choice*, *Weighing Pros & Cons*, and *Hesitating / Being Indecisive* with Portuguese translations 🇵🇹.
-- **✏️ Interactive Homework & Second Conditionals**: Auto-graded quizzes with feedback explanations.
-- **📋 1-Click Preply Exporter**: Generates `WouldYouRather_Homework.txt` to upload directly to the teacher on Preply.
-- **🎨 Female Aesthetic**: Rose-gold (`#c86b7b`), blush pink (`#e8a5b8`), gold accents (`#d4af37`), Playfair Display serif typography, and glassmorphism cards.
+- **🌸 HD Visual Story Cards**: High-definition scene cards for London Underground events, Soho cafe meetings, afternoon tea mishaps, and travel flight delays.
+- **🔊 British Audio Pronunciation**: Built-in Web Speech API TTS to listen to natural British English pronunciation for all functional storytelling phrases.
+- **💬 Functional Storytelling Bank**: Phrases for *Story Hooks*, *Building Tension*, *Dramatic Climax*, and *Reflecting* with Portuguese translations 🇵🇹.
+- **✏️ Auto-Graded Homework & Quizzes**: Narrative tenses, connectors, and grid game scoring.
+- **📋 1-Click Preply Exporter**: Generates copyable/downloadable homework reports to send directly to your teacher on Preply.
+- **🎨 Modern Aesthetic**: Rose-gold (`#c86b7b`), blush pink (`#e8a5b8`), gold accents (`#d4af37`), Playfair Display serif typography, and glassmorphic card layouts.
 
 ---
 
-## 🚀 How to Publish to GitHub Pages
+## 🚀 Published to GitHub Pages
 
-This project is 100% static (`index.html`, `student_homework.html`, `styles.css`, `app.js`, `vocabulary-data.js`), making it ready for **free GitHub Pages hosting**.
-
-```bash
-git add .
-git commit -m "Update homework portal and curriculum roadmap"
-git push origin main
-```
-
-Live student link on GitHub Pages:
-**`https://log210788.github.io/London/student_homework.html`**
+Live links on GitHub Pages:
+- **Student Homework Portal**: [`https://log210788.github.io/London/student_homework.html`](https://log210788.github.io/London/student_homework.html)
+- **Teacher & Tutor Hub**: [`https://log210788.github.io/London/index.html`](https://log210788.github.io/London/index.html)
 
 ---
 

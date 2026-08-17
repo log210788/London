@@ -20,17 +20,17 @@
     
     <!-- Hero Header Banner -->
     <header class="hero-header">
-      <div class="hero-badge">
+      <div class="hero-badge" id="hero-active-week-badge">
         <span>🌸 Preply Conversational English Hub</span>
         <span>•</span>
-        <span>8-Week Fluency Roadmap</span>
+        <span>Week 2 Active</span>
         <span>•</span>
         <span>Target: B1/B2 Intermediate</span>
       </div>
 
-      <h1 class="hero-title">Welcome! ✨</h1>
+      <h1 class="hero-title" id="hero-topic-title">The Art of Storytelling & Personal Anecdotes ✨</h1>
       <p class="hero-subtitle">
-        Your interactive home for 1-on-1 Preply English lessons, 8-week fluency goals, visual conversation cards, second conditionals, and homework exercises!
+        Your interactive home for 1-on-1 Preply English lessons, 8-week fluency goals, visual conversation cards, personal anecdotes, narrative tenses, and homework games!
       </p>
 
       <!-- Quick Action Buttons -->
@@ -39,29 +39,32 @@
           <span>🚀</span> Open Student Homework Portal
         </a>
         <a href="#active-homework-section" class="btn-secondary" style="text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 12px 20px;">
-          <span>✏️</span> Jump to Current Homework (Week 1)
+          <span>🧩</span> Play Week 2 Add-the-Grid Game
         </a>
       </div>
       
       <div class="hero-stats-row">
         <div class="stat-pill">
           <span>📅 Active Lesson:</span>
-          <strong>Week 1 of 8</strong>
+          <strong>Week 2 of 8</strong>
         </div>
         <div class="stat-pill">
           <span>💬 Topic:</span>
-          <strong>Would You Rather...?</strong>
+          <strong>Storytelling & Anecdotes</strong>
         </div>
         <div class="stat-pill">
-          <span>⭐ Homework Score:</span>
+          <span>⭐ Total Homework Score:</span>
           <strong id="header-score-val">0 pts</strong>
         </div>
         <div class="stat-pill">
-          <span>🏆 Progress:</span>
+          <span>🏆 Quiz Completion:</span>
           <strong id="header-progress-val">0%</strong>
         </div>
       </div>
     </header>
+
+    <!-- Week Switcher Controller -->
+    <div id="week-switcher-container"></div>
 
     <!-- SECTION 1: 8-WEEK CURRICULUM ROADMAP -->
     <section class="card-section" style="margin-bottom: 32px;">
@@ -71,7 +74,7 @@
             🗺️ Course Syllabus
           </span>
           <h2 class="section-title" style="margin-top: 6px;"><span>🗓️</span> 8-Week Conversational English Roadmap</h2>
-          <p class="section-desc">Here is your 8-week learning plan for your Preply lessons! Click on Week 1 to access your active homework.</p>
+          <p class="section-desc">Here is your 8-week learning plan for your Preply lessons! Switch between active weeks to access your practice and homework.</p>
         </div>
       </div>
 
@@ -81,31 +84,31 @@
       </div>
     </section>
 
-    <!-- SECTION 2: ACTIVE HOMEWORK WORKSPACE (WEEK 1) -->
+    <!-- SECTION 2: ACTIVE HOMEWORK WORKSPACE -->
     <div id="active-homework-section">
       <div class="section-header" style="margin-bottom: 16px;">
         <div>
           <span style="background: #e8f5e9; color: var(--success); padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">
-            🌟 Active Homework • Week 1
+            🌟 Active Homework Workspace
           </span>
-          <h2 class="section-title" style="margin-top: 6px;"><span>✏️</span> Week 1: "Would You Rather...?" Homework & Practice</h2>
-          <p class="section-desc">Complete these exercises, practice natural phrase pronunciation, and download your homework report to send to your teacher on Preply!</p>
+          <h2 class="section-title" id="active-homework-title" style="margin-top: 6px;"><span>✏️</span> Week 2: "The Art of Storytelling & Personal Anecdotes" Workspace</h2>
+          <p class="section-desc" id="active-homework-desc">Complete these exercises, practice natural phrase pronunciation, play the Add-the-Grid Game, and download your homework report to send to your teacher on Preply!</p>
         </div>
       </div>
 
       <!-- Navigation Tabs -->
       <nav class="nav-tabs" id="main-nav-tabs" role="tablist">
         <button class="tab-btn active" data-tab="visuals" role="tab">
-          <span>🌸</span> Visual Dilemmas
+          <span>🌸</span> Visual Scene Cards
         </button>
         <button class="tab-btn" data-tab="phrases" role="tab">
           <span>💬</span> Phrase Bank
         </button>
         <button class="tab-btn" data-tab="cards" role="tab">
-          <span>🎴</span> Conversation Cards
+          <span>🎴</span> Conversation Prompts
         </button>
         <button class="tab-btn" data-tab="quizzes" role="tab">
-          <span>✏️</span> Preply Homework
+          <span>🧩</span> Grid Game & Homework
         </button>
         <button class="tab-btn" data-tab="progress" role="tab">
           <span>📊</span> My Progress
@@ -123,8 +126,8 @@
           <div class="card-section">
             <div class="section-header">
               <div>
-                <h2 class="section-title"><span>🌸</span> Visual Dilemma Cards</h2>
-                <p class="section-desc">Interactive visual cards with high-definition dilemma scenes, target phrases, native British audio, and 3-step discussion flows for class!</p>
+                <h2 class="section-title"><span>🌸</span> Visual Scene & Anecdote Cards</h2>
+                <p class="section-desc">Interactive visual cards with high-definition storytelling scenes, target phrases, native British audio, and 3-step discussion flows for class!</p>
               </div>
             </div>
 
@@ -139,8 +142,8 @@
           <div class="card-section">
             <div class="section-header">
               <div>
-                <h2 class="section-title"><span>💬</span> Functional Language & Phrase Bank</h2>
-                <p class="section-desc">Master natural phrases for expressing choices, weighing pros & cons, and hesitating politely. Click the speaker icon to listen to British audio pronunciation!</p>
+                <h2 class="section-title"><span>💬</span> Functional Language & Storytelling Expressions</h2>
+                <p class="section-desc">Master natural phrases for story hooks, building tension, dramatic pauses, and reflecting. Click the speaker icon to listen to British audio pronunciation!</p>
               </div>
             </div>
 
@@ -155,8 +158,8 @@
           <div class="card-section">
             <div class="section-header">
               <div>
-                <h2 class="section-title"><span>🎴</span> "Would You Rather...?" Conversation Cards</h2>
-                <p class="section-desc">10 interactive dilemma cards across Lifestyle, Travel, Superpowers, and Food. Click your preferred option to practice justifying your choice!</p>
+                <h2 class="section-title"><span>🎴</span> Storytelling & Anecdote Prompt Cards</h2>
+                <p class="section-desc">10 interactive prompt cards across funny mishaps, travel twists, coincidences, and surprises. Click your preferred story angle to practice!</p>
               </div>
             </div>
 
@@ -171,13 +174,20 @@
           </div>
         </section>
 
-        <!-- TAB 4: PREPLY HOMEWORK QUIZZES -->
+        <!-- TAB 4: PREPLY HOMEWORK QUIZZES & ADD THE GRID GAME -->
         <section id="tab-quizzes" class="tab-content" role="tabpanel">
           <div class="card-section">
-            <div class="section-header">
+            
+            <!-- Main Grid Game Container -->
+            <div id="grid-game-container">
+              <!-- Rendered dynamically by JS -->
+            </div>
+
+            <!-- Additional Quizzes -->
+            <div class="section-header" style="margin-top: 36px;">
               <div>
-                <h2 class="section-title"><span>✏️</span> Preply Homework & Second Conditional Exercises</h2>
-                <p class="section-desc">Complete these exercises to practice second conditionals ("If I had to choose... I would pick...") and functional phrases. Your score saves automatically!</p>
+                <h2 class="section-title"><span>✏️</span> Grammar & Narrative Tenses Exercises</h2>
+                <p class="section-desc">Complete these auto-graded practice questions to test past simple, past continuous, past perfect, and storytelling transition connectors!</p>
               </div>
             </div>
 
